@@ -13,7 +13,7 @@ public class HtmlGenerator {
     private final File outputFile = new File("build/result.html");
 
     public void generate() {
-        createOutputFile();
+        createOutputFile(false);
         writeToFile();
     }
 
@@ -25,12 +25,19 @@ public class HtmlGenerator {
         }
     }
 
-    private void createOutputFile() {
+    private void createOutputFile(boolean visited) {
         if (!outputFile.exists()) {
             try {
                 Files.createFile(outputFile.toPath());
             } catch (IOException e) {
                 logger.error("Could not create file {}", outputFile.getName(), e);
+            }
+        } else if (!visited) {
+            try {
+                Files.delete(outputFile.toPath());
+                createOutputFile(true);
+            } catch (IOException e) {
+                logger.error("Could not delete file {}", outputFile.getName(), e);
             }
         }
     }
