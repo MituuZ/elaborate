@@ -34,6 +34,7 @@ public class ElaborateTest {
     void callMethod() {
         var elaborate = new Elaborate<>(String.class);
         elaborate.addInstance("Hello");
-        assertEquals(5, elaborate.runMethod("length", 0));
+        assertEquals(5, elaborate.<Integer>runMethod("length", 0));
+        assertEquals("hello", elaborate.<String>runMethod("toLowerCase", 0));
     }
 }

@@ -18,11 +18,11 @@ public class Elaborate<T> {
         }
     }
 
-    public int runMethod(String methodName, int index) {
+    public <S> S runMethod(String methodName, int index) {
         T instance = analyzeClasses.get(index);
         try {
             var method = analyzeClass.getMethod(methodName);
-            return (int) method.invoke(instance);
+            return (S) method.invoke(instance);
         } catch (NoSuchMethodException e) {
             logger.error("Invalid method name: {}", methodName, e);
             throw new RuntimeException(e);
