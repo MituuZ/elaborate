@@ -1,5 +1,6 @@
 package com.mituuz.elaborate;
 
+import com.mituuz.elaborate.html.HtmlGenerator;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -10,10 +11,16 @@ import java.util.List;
 public class Elaborate<T> {
     private static final Logger logger = LoggerFactory.getLogger(Elaborate.class);
     private final List<T> analyzeClasses = new ArrayList<>();
+    private boolean generateHtml = false;
 
     public void analyze() {
+        List<String> output = new ArrayList<>();
         for (T instance : analyzeClasses) {
-            logger.info(instance.toString());
+            output.add(instance.toString());
+        }
+        if (generateHtml) {
+            var htmlGenerator = new HtmlGenerator();
+            htmlGenerator.generate(output);
         }
     }
 
