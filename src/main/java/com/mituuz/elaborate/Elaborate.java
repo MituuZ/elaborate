@@ -27,7 +27,7 @@ public class Elaborate<T> {
             logger.error("Invalid method name: {}", methodName, e);
             throw new RuntimeException(e);
         } catch (InvocationTargetException e) {
-            logger.error("Invalid method: {} target: {}", methodName, instance.getClass().getName(), e);
+            logger.error("Invalid method: {} for target class: {}", methodName, instance.getClass().getName(), e);
             throw new RuntimeException(e);
         } catch (IllegalAccessException e) {
             throw new RuntimeException(e);
