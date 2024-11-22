@@ -7,19 +7,20 @@ import java.io.File;
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
+import java.util.List;
 
 public class HtmlGenerator {
     private static final Logger logger = LoggerFactory.getLogger(HtmlGenerator.class);
     private final File outputFile = new File("build/result.html");
 
-    public void generate() {
+    public void generate(List<String> input) {
         createOutputFile(false);
-        writeToFile();
+        writeToFile(input);
     }
 
-    private void writeToFile() {
+    private void writeToFile(List<String> input) {
         try {
-            Files.write(outputFile.toPath(), "Hello World".getBytes(StandardCharsets.UTF_8));
+            Files.write(outputFile.toPath(), input, StandardCharsets.UTF_8);
         } catch (IOException e) {
             logger.error("Failed to write to output file: {}", outputFile.getName(), e);
         }
@@ -44,6 +45,6 @@ public class HtmlGenerator {
 
     public static void main(String[] args) {
         var htmlGenerator = new HtmlGenerator();
-        htmlGenerator.generate();
+        htmlGenerator.generate(List.of("Hello, World", "Hello Moon"));
     }
 }
