@@ -14,15 +14,8 @@ public class ElaborateTest {
     }
 
     @Test
-    void checkClassName() {
-        var elaborate = new Elaborate<>(String.class);
-        String className = elaborate.getClassName();
-        assertEquals("java.lang.String", className);
-    }
-
-    @Test
     void addInstances() {
-        var elaborate = new Elaborate<>(String.class);
+        var elaborate = new Elaborate<>();
         elaborate.addInstance("Hello");
         elaborate.addInstance("World");
         assertEquals(2, elaborate.getAnalyzeClasses().size());
@@ -32,7 +25,7 @@ public class ElaborateTest {
 
     @Test
     void callMethod() {
-        var elaborate = new Elaborate<>(String.class);
+        var elaborate = new Elaborate<>();
         elaborate.addInstance("Hello");
         assertEquals(5, elaborate.<Integer>runMethod("length", 0));
         assertEquals("hello", elaborate.<String>runMethod("toLowerCase", 0));

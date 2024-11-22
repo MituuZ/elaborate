@@ -9,7 +9,6 @@ import java.util.List;
 
 public class Elaborate<T> {
     private static final Logger logger = LoggerFactory.getLogger(Elaborate.class);
-    private final Class<T> analyzeClass;
     private final List<T> analyzeClasses = new ArrayList<>();
 
     public void analyze() {
@@ -20,6 +19,7 @@ public class Elaborate<T> {
 
     public <S> S runMethod(String methodName, int index) {
         T instance = analyzeClasses.get(index);
+        var analyzeClass = instance.getClass();
         try {
             var method = analyzeClass.getMethod(methodName);
             return (S) method.invoke(instance);
@@ -32,14 +32,6 @@ public class Elaborate<T> {
         } catch (IllegalAccessException e) {
             throw new RuntimeException(e);
         }
-    }
-
-    public Elaborate(Class<T> analyzeClass) {
-        this.analyzeClass = analyzeClass;
-    }
-
-    public String getClassName() {
-        return this.analyzeClass.getName();
     }
 
     public void addInstance(T instance) {
