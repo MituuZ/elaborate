@@ -29,4 +29,11 @@ public class ElaborateTest {
         elaborate.addInstances(List.of("Hello", "World"));
         assertEquals(4, elaborate.getAnalyzeClasses().size());
     }
+
+    @Test
+    void callMethod() {
+        var elaborate = new Elaborate<>(String.class);
+        elaborate.addInstance("Hello");
+        assertEquals(5, elaborate.runMethod("length", 0));
+    }
 }
