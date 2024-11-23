@@ -6,7 +6,7 @@ import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-public class ElaborateTest {
+class ElaborateTest {
     @Test
     void addInstances() {
         var elaborate = new Elaborate<>();

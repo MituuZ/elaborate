@@ -11,7 +11,7 @@ import java.util.List;
 public class Elaborate<T> {
     private static final Logger logger = LoggerFactory.getLogger(Elaborate.class);
     private final List<T> analyzeClasses = new ArrayList<>();
-    private boolean generateHtml = false;
+    private boolean generateHtml = true;
 
     public void analyze() {
         List<String> output = new ArrayList<>();
@@ -51,5 +51,11 @@ public class Elaborate<T> {
 
     public List<T> getAnalyzeClasses() {
         return this.analyzeClasses;
+    }
+
+    public static void main(String[] args) {
+        var elaborate = new Elaborate<>();
+        elaborate.addInstances(List.of("Hell", "Orld"));
+        elaborate.analyze();
     }
 }
