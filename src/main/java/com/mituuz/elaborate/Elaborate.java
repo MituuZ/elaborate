@@ -11,13 +11,28 @@ public class Elaborate<T> {
     private static final Logger logger = LoggerFactory.getLogger(Elaborate.class);
     private final List<T> analyzeClasses = new ArrayList<>();
     private boolean generateHtml = false;
+    private boolean printMethodNames = true;
     private Set<String> analyzeMethods = new HashSet<>();
 
     public void analyze() {
         List<String> output = new ArrayList<>();
         for (T instance : analyzeClasses) {
             for (var method : analyzeMethods) {
-                output.add(runMethod(instance, method));
+                var sb = new StringBuilder();
+                if (printMethodNames) {
+                    sb.append(method).append(": ");
+                }
+                var result = runMethod(instance, method);
+                switch (result) {
+                    case String stringResult -> sb.append(stringResult);
+                    case Integer integerResult -> {
+                        // check if method has limits
+                        sb.append(integerResult);
+                    }
+                    default -> sb.append(result);
+                }
+                sb.append("\n");
+                output.add(sb.toString());
             }
         }
         if (generateHtml) {
@@ -66,11 +81,16 @@ public class Elaborate<T> {
         Collections.addAll(analyzeMethods, methodNames);
     }
 
+    public void printMethodNames(boolean printMethodNames) {
+        this.printMethodNames = printMethodNames;
+    }
+
     public static void main(String[] args) {
         Elaborate<String> elaborate = new Elaborate<>();
         elaborate.generateHtml(true);
         elaborate.addInstances(List.of("Hell", "Orld"));
         elaborate.addAnalyzeMethods("toString", "toLowerCase");
+        elaborate.printMethodNames(true);
         elaborate.analyze();
     }
 }
