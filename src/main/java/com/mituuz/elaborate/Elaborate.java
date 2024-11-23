@@ -16,7 +16,9 @@ public class Elaborate<T> {
     public void analyze() {
         List<String> output = new ArrayList<>();
         for (T instance : analyzeClasses) {
-            output.add(instance.toString());
+            for (var method : analyzeMethods) {
+                output.add(runMethod(instance, method));
+            }
         }
         if (generateHtml) {
             var htmlGenerator = new HtmlGenerator();
@@ -24,8 +26,7 @@ public class Elaborate<T> {
         }
     }
 
-    public <S> S runMethod(String methodName, int index) {
-        T instance = analyzeClasses.get(index);
+    public <S> S runMethod(T instance, String methodName) {
         var analyzeClass = instance.getClass();
         try {
             var method = analyzeClass.getMethod(methodName);
@@ -69,6 +70,7 @@ public class Elaborate<T> {
         Elaborate<String> elaborate = new Elaborate<>();
         elaborate.generateHtml(true);
         elaborate.addInstances(List.of("Hell", "Orld"));
+        elaborate.addAnalyzeMethods("toString", "toLowerCase");
         elaborate.analyze();
     }
 }

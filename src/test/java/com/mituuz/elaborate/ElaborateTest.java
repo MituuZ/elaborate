@@ -21,7 +21,8 @@ class ElaborateTest {
     void callMethod() {
         var elaborate = new Elaborate<>();
         elaborate.addInstance("Hello");
-        assertEquals(5, elaborate.<Integer>runMethod("length", 0));
-        assertEquals("hello", elaborate.<String>runMethod("toLowerCase", 0));
+        var instance = elaborate.getAnalyzeClasses().getFirst();
+        assertEquals(5, elaborate.<Integer>runMethod(instance, "length"));
+        assertEquals("hello", elaborate.<String>runMethod(instance, "toLowerCase"));
     }
 }
