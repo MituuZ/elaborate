@@ -16,6 +16,8 @@ public class Elaborate<T> {
 
     public void analyze() {
         List<String> output = new ArrayList<>();
+
+        // TODO: This should create a class instead of constructing a set of strings
         for (T instance : analyzeClasses) {
             for (var method : analyzeMethods) {
                 var sb = new StringBuilder();
@@ -89,7 +91,7 @@ public class Elaborate<T> {
         Elaborate<String> elaborate = new Elaborate<>();
         elaborate.generateHtml(true);
         elaborate.addInstances(List.of("Hell", "Orld"));
-        elaborate.addAnalyzeMethods("toString", "toLowerCase");
+        elaborate.addAnalyzeMethods("toString", "toLowerCase", "length");
         elaborate.printMethodNames(true);
         elaborate.analyze();
     }
