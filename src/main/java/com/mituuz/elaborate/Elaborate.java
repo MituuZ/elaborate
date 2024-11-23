@@ -5,13 +5,13 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.lang.reflect.InvocationTargetException;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 
 public class Elaborate<T> {
     private static final Logger logger = LoggerFactory.getLogger(Elaborate.class);
     private final List<T> analyzeClasses = new ArrayList<>();
     private boolean generateHtml = false;
+    private Set<String> analyzeMethods = new HashSet<>();
 
     public void analyze() {
         List<String> output = new ArrayList<>();
@@ -55,6 +55,14 @@ public class Elaborate<T> {
 
     public void generateHtml(boolean generateHtml) {
         this.generateHtml = generateHtml;
+    }
+
+    public void setAnalyzeMethods(String... methodNames) {
+        analyzeMethods = Set.of(methodNames);
+    }
+
+    public void addAnalyzeMethods(String... methodNames) {
+        Collections.addAll(analyzeMethods, methodNames);
     }
 
     public static void main(String[] args) {
