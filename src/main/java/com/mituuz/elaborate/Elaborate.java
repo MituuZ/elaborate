@@ -58,7 +58,7 @@ public class Elaborate<T> {
     }
 
     public static void main(String[] args) {
-        var elaborate = new Elaborate<>();
+        Elaborate<String> elaborate = new Elaborate<>();
         elaborate.generateHtml(true);
         elaborate.addInstances(List.of("Hell", "Orld"));
         elaborate.analyze();
