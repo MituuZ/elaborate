@@ -41,6 +41,7 @@ import java.util.*;
 public class Elaborate<T> {
     private static final Logger logger = LoggerFactory.getLogger(Elaborate.class);
     private final List<T> analyzeClasses = new ArrayList<>();
+    private final AnalyzeContainer analyzeContainer = new AnalyzeContainer();
     private boolean generateHtml = false;
     private boolean generateHtmlTable = false;
     private boolean printMethodNames = true;
@@ -49,7 +50,9 @@ public class Elaborate<T> {
 
     public void analyze() {
         List<String> output = new ArrayList<>();
-        var analyzeContainer = new AnalyzeContainer(analyzeMethods);
+        analyzeContainer.setAnalyzeMethods(analyzeMethods);
+        analyzeContainer.generateHtmlTable(generateHtmlTable);
+        analyzeContainer.generateHtml(generateHtml);
 
         for (T instance : analyzeClasses) {
             var title = getTitle(instance);

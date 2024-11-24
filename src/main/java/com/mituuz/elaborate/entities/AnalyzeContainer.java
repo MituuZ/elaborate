@@ -32,9 +32,27 @@ import java.util.Set;
 
 public class AnalyzeContainer {
     public final List<AnalyzeInstance> analyzeInstances = new ArrayList<>();
-    public final Set<String> analyzeMethods;
+    public Set<String> analyzeMethods;
+    private boolean generateHtml = false;
+    private boolean generateHtmlTable = false;
 
-    public AnalyzeContainer(Set<String> analyzeMethods) {
+    public boolean generateHtml() {
+        return generateHtml;
+    }
+
+    public boolean generateHtmlTable() {
+        return generateHtmlTable;
+    }
+
+    public void generateHtml(boolean generateHtml) {
+        this.generateHtml = generateHtml;
+    }
+
+    public void generateHtmlTable(boolean generateHtmlTable) {
+        this.generateHtmlTable = generateHtmlTable;
+    }
+
+    public void setAnalyzeMethods(Set<String> analyzeMethods) {
         this.analyzeMethods = analyzeMethods;
     }
 

@@ -54,6 +54,12 @@ public class HtmlGenerator {
         logger.info("Generating HTML report");
         createNewOutputFile(false, OUTPUT_FILE);
         var input = new ArrayList<String>();
+
+        if (analyzeContainer.generateHtmlTable()) {
+            var link = "<a href=\"table.html\">Table Report</a>";
+            input.add(link);
+        }
+
         for (AnalyzeInstance analyzeInstance : analyzeContainer.getAnalyzeInstances()) {
             input.add("<div class=\"instance\">");
             input.add("<h2>" + analyzeInstance.getTitle() + "</h2>");
@@ -71,6 +77,12 @@ public class HtmlGenerator {
         logger.info("Generating HTML table report");
         createNewOutputFile(false, OUTPUT_TABLE_FILE);
         var input = new ArrayList<String>();
+
+        if (analyzeContainer.generateHtml()) {
+            var link = "<a href=\"result.html\">Report</a>";
+            input.add(link);
+        }
+
         input.add("<table>");
         input.add("<tr>");
         input.add("<th>Instance</th>");
