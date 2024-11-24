@@ -6,48 +6,49 @@ public class AnalyzeMethod {
     private Integer integerValue;
     private MethodConditional methodConditional = null;
 
-    public AnalyzeMethod(String methodName, Object value) {
+    public AnalyzeMethod(String methodName) {
         this.methodName = methodName;
-        addValue(value);
     }
 
-    private void addValue(Object value) {
+    public AnalyzeMethod(AnalyzeMethod analyzeMethod) {
+        this.methodName = analyzeMethod.getMethodName();
+        this.stringValue = analyzeMethod.getStringValue();
+        this.integerValue = analyzeMethod.getIntegerValue();
+        if (analyzeMethod.methodConditional != null)
+            this.methodConditional = new MethodConditional(analyzeMethod.methodConditional);
+    }
+
+    public void addValue(Object value) {
         if (value instanceof String) {
             this.stringValue = (String) value;
         } else if (value instanceof Integer) {
             this.integerValue = (Integer) value;
         }
+        if (methodConditional != null)
+            methodConditional.setValues(stringValue, integerValue);
     }
 
     public String getHtml(boolean printMethodName) {
-        if (methodConditional == null || methodConditional.isConditionMet()) {
-            var input = new StringBuilder();
-            if (printMethodName)
-                input.append("<h3>").append(getMethodName()).append("</h3>");
+        var input = new StringBuilder();
+        if (printMethodName)
+            input.append("<h3>").append(getMethodName()).append("</h3>");
 
-            if (getStringValue() != null) {
-                input.append("<p>").append(getStringValue()).append("</p>");
-            } else if (getIntegerValue() != null) {
-                input.append("<p>").append(getIntegerValue()).append("</p>");
-            } else {
-                input.append("<p>Empty</p>");
-            }
-            return input.toString();
+        if (getStringValue() != null) {
+            input.append("<p>").append(getStringValue()).append("</p>");
+        } else if (getIntegerValue() != null) {
+            input.append("<p>").append(getIntegerValue()).append("</p>");
+        } else {
+            input.append("<p>Empty</p>");
         }
-
-        return "";
+        return input.toString();
     }
 
     public String toString(boolean printMethodName) {
-        if (methodConditional == null || methodConditional.isConditionMet()) {
-            if (printMethodName) {
-                return getMethodName() + ": " + (getStringValue() != null ? getStringValue() : getIntegerValue()) + "\n";
-            } else {
-                return (getStringValue() != null ? getStringValue() : getIntegerValue()) + "\n";
-            }
+        if (printMethodName) {
+            return getMethodName() + ": " + (getStringValue() != null ? getStringValue() : getIntegerValue()) + "\n";
+        } else {
+            return (getStringValue() != null ? getStringValue() : getIntegerValue()) + "\n";
         }
-
-        return "";
     }
 
     public String getMethodName() {
@@ -64,6 +65,10 @@ public class AnalyzeMethod {
 
     public void setMethodConditional(MethodConditional methodConditional) {
         this.methodConditional = methodConditional;
+    }
+
+    public boolean isConditionMet() {
+        return methodConditional == null || methodConditional.isConditionMet();
     }
 
     public enum ConditionType {
@@ -83,11 +88,19 @@ public class AnalyzeMethod {
         LESS_THAN_OR_EQUALS
     }
 
-    public class MethodConditional {
+    public static class MethodConditional {
         private final ConditionType conditionType;
         private final Integer conditionIntValue;
         private final String conditionStringValue;
         private final ConditionValueConditional conditionValueConditional;
+
+        private String stringValue;
+        private Integer integerValue;
+
+        public void setValues(String stringValue, Integer integerValue) {
+            this.stringValue = stringValue;
+            this.integerValue = integerValue;
+        }
 
         public MethodConditional(ConditionType conditionType, int conditionIntValue, String conditionStringValue, ConditionValueConditional conditionValueConditional) {
             this.conditionType = conditionType;
@@ -97,7 +110,7 @@ public class AnalyzeMethod {
         }
 
         public boolean isConditionMet() {
-            switch (methodConditional.conditionType) {
+            switch (conditionType) {
                 case STRING:
                     return isConditionMet(stringValue);
                 case INTEGER:
@@ -112,17 +125,17 @@ public class AnalyzeMethod {
         private boolean isConditionMet(Integer intValue) {
             switch (conditionValueConditional) {
                 case GREATER_THAN:
-                    return integerValue > conditionIntValue;
+                    return intValue > conditionIntValue;
                 case LESS_THAN:
-                    return integerValue < conditionIntValue;
+                    return intValue < conditionIntValue;
                 case GREATER_THAN_OR_EQUALS:
-                    return integerValue >= conditionIntValue;
+                    return intValue >= conditionIntValue;
                 case LESS_THAN_OR_EQUALS:
-                    return integerValue <= conditionIntValue;
+                    return intValue <= conditionIntValue;
                 case EQUALS:
-                    return integerValue.equals(conditionIntValue);
+                    return intValue.equals(conditionIntValue);
                 case NOT_EQUALS:
-                    return !integerValue.equals(conditionIntValue);
+                    return !intValue.equals(conditionIntValue);
                 default:
                     throw new IllegalArgumentException("Invalid condition value conditional");
             }
@@ -141,6 +154,13 @@ public class AnalyzeMethod {
                 default:
                     throw new IllegalArgumentException("Invalid condition value conditional");
             }
+        }
+
+        public MethodConditional(MethodConditional methodConditional) {
+            this.conditionType = methodConditional.conditionType;
+            this.conditionIntValue = methodConditional.conditionIntValue;
+            this.conditionStringValue = methodConditional.conditionStringValue;
+            this.conditionValueConditional = methodConditional.conditionValueConditional;
         }
     }
 }

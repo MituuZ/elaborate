@@ -32,7 +32,7 @@ import java.util.Set;
 
 public class AnalyzeContainer {
     private final List<AnalyzeInstance> analyzeInstances = new ArrayList<>();
-    private Set<String> analyzeMethods;
+    private Set<AnalyzeMethod> analyzeMethods;
     private boolean generateHtml = false;
     private boolean generateHtmlTable = false;
 
@@ -52,11 +52,11 @@ public class AnalyzeContainer {
         this.generateHtmlTable = generateHtmlTable;
     }
 
-    public void setAnalyzeMethods(Set<String> analyzeMethods) {
+    public void setAnalyzeMethods(Set<AnalyzeMethod> analyzeMethods) {
         this.analyzeMethods = analyzeMethods;
     }
 
-    public Set<String> getAnalyzeMethods() {
+    public Set<AnalyzeMethod> getAnalyzeMethods() {
         return analyzeMethods;
     }
 
@@ -75,11 +75,22 @@ public class AnalyzeContainer {
             this.title = title;
         }
 
-        private final List<AnalyzeMethod> analyzeMethods = new ArrayDeque<>();
+        private final List<AnalyzeMethod> analyzeMethods = new ArrayList<>();
 
         public void addResult(AnalyzeMethod analyzeMethod) {
             analyzeMethods.add(analyzeMethod);
         }
+
+        public boolean isConditionMet() {
+            for (AnalyzeMethod analyzeMethod : analyzeMethods) {
+                if (!analyzeMethod.isConditionMet()) {
+                    return false;
+                }
+            }
+
+            return true;
+        }
+
 
         public List<AnalyzeMethod> getAnalyzeMethods() {
             return analyzeMethods;

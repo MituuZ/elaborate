@@ -24,19 +24,22 @@ SOFTWARE.
 
 package com.mituuz.elaborate;
 
-import java.util.Collections;
 import java.util.List;
 import java.util.Set;
 
 import com.mituuz.elaborate.entities.AnalyzeContainer;
 import com.mituuz.elaborate.entities.AnalyzeContainer.AnalyzeInstance;
 import com.mituuz.elaborate.entities.AnalyzeMethod;
+import com.mituuz.elaborate.entities.AnalyzeMethod.MethodConditional;
 import com.mituuz.elaborate.html.HtmlGenerator;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.lang.reflect.InvocationTargetException;
 import java.util.*;
+
+import static com.mituuz.elaborate.entities.AnalyzeMethod.ConditionType.INTEGER;
+import static com.mituuz.elaborate.entities.AnalyzeMethod.ConditionValueConditional.GREATER_THAN;
 
 public class Elaborate<T> {
     private static final Logger logger = LoggerFactory.getLogger(Elaborate.class);
@@ -45,7 +48,7 @@ public class Elaborate<T> {
     private boolean generateHtml = false;
     private boolean generateHtmlTable = false;
     private boolean printMethodNames = true;
-    private Set<String> analyzeMethods = new LinkedHashSet<>();
+    private Set<AnalyzeMethod> analyzeMethods = new LinkedHashSet<>();
     private String titleMethod = "toString";
 
     public void analyze() {
@@ -58,11 +61,12 @@ public class Elaborate<T> {
             var title = getTitle(instance);
             var analyzeInstance = new AnalyzeInstance(title);
             output.add(title + "\n");
-            for (var method : analyzeMethods) {
-                var result = runMethod(instance, method);
-                var analyzeMethod = new AnalyzeMethod(method, result);
-                analyzeInstance.addResult(analyzeMethod);
-                output.add(analyzeMethod.toString(printMethodNames));
+            for (var analyzeMethod : analyzeMethods) {
+                var method = new AnalyzeMethod(analyzeMethod);
+                var result = runMethod(instance, method.getMethodName());
+                method.addValue(result);
+                analyzeInstance.addResult(method);
+                output.add(method.toString(printMethodNames));
             }
             analyzeContainer.addInstance(analyzeInstance);
             output.add("\n");
@@ -122,17 +126,16 @@ public class Elaborate<T> {
     }
 
     /**
-     * Set the methods to analyze
-     */
-    public void setAnalyzeMethods(String... methodNames) {
-        analyzeMethods = Set.of(methodNames);
-    }
-
-    /**
      * Add multiple methods to the list of methods to analyze
      */
     public void addAnalyzeMethods(String... methodNames) {
-        Collections.addAll(analyzeMethods, methodNames);
+        for (String methodName : methodNames) {
+            analyzeMethods.add(new AnalyzeMethod(methodName));
+        }
+    }
+
+    public void addConditionalMethods(AnalyzeMethod... analyzeMethods) {
+        Collections.addAll(this.analyzeMethods, analyzeMethods);
     }
 
     public void setTitleMethod(String titleMethod) {
@@ -157,8 +160,14 @@ public class Elaborate<T> {
         Elaborate<String> elaborate = new Elaborate<>();
         elaborate.generateHtmlTable(true);
         elaborate.generateHtml(true);
-        elaborate.addInstances(List.of("Hell", "Orld"));
-        elaborate.addAnalyzeMethods("toLowerCase", "length");
+        elaborate.addInstances(List.of("Hell", "Orld", "OF", "Hello there"));
+        elaborate.addAnalyzeMethods("toLowerCase");
+
+        AnalyzeMethod conditionalMethod = new AnalyzeMethod("length");
+        var condition = new MethodConditional(INTEGER, 5, "", GREATER_THAN);
+        conditionalMethod.setMethodConditional(condition);
+
+        elaborate.addConditionalMethods(conditionalMethod);
         elaborate.setTitleMethod("toString");
         elaborate.printMethodNames(true);
 

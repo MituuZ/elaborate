@@ -61,14 +61,16 @@ public class HtmlGenerator {
         }
 
         for (AnalyzeInstance analyzeInstance : analyzeContainer.getAnalyzeInstances()) {
-            input.add("<div class=\"instance\">");
-            input.add("<h2>" + analyzeInstance.getTitle() + "</h2>");
-            for (AnalyzeMethod analyzeMethod : analyzeInstance.getAnalyzeMethods()) {
-                input.add("<div class=\"method\">");
-                input.add(analyzeMethod.getHtml(printMethodNames));
+            if (analyzeInstance.isConditionMet()) {
+                input.add("<div class=\"instance\">");
+                input.add("<h2>" + analyzeInstance.getTitle() + "</h2>");
+                for (AnalyzeMethod analyzeMethod : analyzeInstance.getAnalyzeMethods()) {
+                    input.add("<div class=\"method\">");
+                    input.add(analyzeMethod.getHtml(printMethodNames));
+                    input.add("</div>");
+                }
                 input.add("</div>");
             }
-            input.add("</div>");
         }
         writeToFile(input, OUTPUT_FILE);
     }
@@ -86,17 +88,19 @@ public class HtmlGenerator {
         input.add("<table>");
         input.add("<tr>");
         input.add("<th>Instance</th>");
-        for (String analyzeMethod : analyzeContainer.getAnalyzeMethods()) {
-            input.add("<th>" + analyzeMethod + "</th>");
+        for (AnalyzeMethod analyzeMethod : analyzeContainer.getAnalyzeMethods()) {
+            input.add("<th>" + analyzeMethod.getMethodName() + "</th>");
         }
         input.add("</tr>");
         for (AnalyzeInstance analyzeInstance : analyzeContainer.getAnalyzeInstances()) {
-            input.add("<tr>");
-            input.add("<td>" + analyzeInstance.getTitle() + "</td>");
-            for (AnalyzeMethod analyzeMethod : analyzeInstance.getAnalyzeMethods()) {
-                input.add("<td>" + analyzeMethod.toString(false) + "</td>");
+            if (analyzeInstance.isConditionMet()) {
+                input.add("<tr>");
+                input.add("<td>" + analyzeInstance.getTitle() + "</td>");
+                for (AnalyzeMethod analyzeMethod : analyzeInstance.getAnalyzeMethods()) {
+                    input.add("<td>" + analyzeMethod.toString(false) + "</td>");
+                }
+                input.add("</tr>");
             }
-            input.add("</tr>");
         }
         input.add("</table>");
         writeToFile(input, OUTPUT_TABLE_FILE);
