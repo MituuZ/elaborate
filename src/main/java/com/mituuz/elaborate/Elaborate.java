@@ -1,5 +1,7 @@
 package com.mituuz.elaborate;
 
+import com.mituuz.elaborate.entities.AnalyzeContainer;
+import com.mituuz.elaborate.entities.AnalyzeContainer.AnalyzeMethod;
 import com.mituuz.elaborate.html.HtmlGenerator;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -16,33 +18,22 @@ public class Elaborate<T> {
 
     public void analyze() {
         List<String> output = new ArrayList<>();
+        var analyzeContainer = new AnalyzeContainer();
 
-        // TODO: This should create a class instead of constructing a set of strings
         for (T instance : analyzeClasses) {
             for (var method : analyzeMethods) {
-                var sb = new StringBuilder();
-                if (printMethodNames) {
-                    sb.append(method).append(": ");
-                }
                 var result = runMethod(instance, method);
-                switch (result) {
-                    case String stringResult -> sb.append(stringResult);
-                    case Integer integerResult -> {
-                        // check if method has limits
-                        sb.append(integerResult);
-                    }
-                    default -> sb.append(result);
-                }
-                sb.append("\n");
-                output.add(sb.toString());
+                var analyzeMethod = new AnalyzeMethod(method, result);
+                analyzeContainer.addResult(analyzeMethod);
+                output.add(analyzeMethod.toString(printMethodNames));
             }
         }
         for (var line : output) {
             System.out.print(line);
         }
         if (generateHtml) {
-            var htmlGenerator = new HtmlGenerator();
-            htmlGenerator.generate(output);
+            var htmlGenerator = new HtmlGenerator(printMethodNames);
+            htmlGenerator.generate(analyzeContainer);
         }
     }
 

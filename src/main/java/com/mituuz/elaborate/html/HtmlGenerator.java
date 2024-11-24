@@ -1,5 +1,7 @@
 package com.mituuz.elaborate.html;
 
+import com.mituuz.elaborate.entities.AnalyzeContainer;
+import com.mituuz.elaborate.entities.AnalyzeContainer.AnalyzeMethod;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -7,14 +9,28 @@ import java.io.File;
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
+import java.util.ArrayList;
 import java.util.List;
 
 public class HtmlGenerator {
     private static final Logger logger = LoggerFactory.getLogger(HtmlGenerator.class);
     private final File outputFile = new File("build/result.html");
 
-    public void generate(List<String> input) {
-        createOutputFile(false);
+    private boolean printMethodNames = false;
+
+    public HtmlGenerator(boolean printMethodNames) {
+        this.printMethodNames = printMethodNames;
+    }
+
+    public HtmlGenerator() { }
+
+    public void generate(AnalyzeContainer analyzeContainer) {
+        logger.info("Generating HTML report");
+        createNewOutputFile(false);
+        var input = new ArrayList<String>();
+        for (AnalyzeMethod analyzeMethod : analyzeContainer.getAnalyzeMethods()) {
+            input.add(analyzeMethod.getHtml(printMethodNames));
+        }
         writeToFile(input);
     }
 
@@ -26,7 +42,7 @@ public class HtmlGenerator {
         }
     }
 
-    private void createOutputFile(boolean visited) {
+    private void createNewOutputFile(boolean visited) {
         if (!outputFile.exists()) {
             try {
                 Files.createFile(outputFile.toPath());
@@ -36,15 +52,10 @@ public class HtmlGenerator {
         } else if (!visited) {
             try {
                 Files.delete(outputFile.toPath());
-                createOutputFile(true);
+                createNewOutputFile(true);
             } catch (IOException e) {
                 logger.error("Could not delete file {}", outputFile.getName(), e);
             }
         }
-    }
-
-    public static void main(String[] args) {
-        var htmlGenerator = new HtmlGenerator();
-        htmlGenerator.generate(List.of("Hello, World", "Hello Moon"));
     }
 }

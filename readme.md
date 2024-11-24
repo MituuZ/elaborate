@@ -30,7 +30,10 @@ length: 4
 ```
 
 ## ToDo
+- [ ] Use classes instead of strings to collect the data
 - [ ] Allow specifying the output file path and name
 - [ ] Add support for fields instead of only methods 
   - i.e. check for the default methods based on the field name
   - Record or getter methods
+- [ ] Add title configuration (which field/method to use as the element title)
+- [ ] Add field configurations (stylize results based on values)
