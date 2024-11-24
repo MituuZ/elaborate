@@ -59,6 +59,8 @@ For now, the output options are as follows:
 
 ## ToDo
 - [ ] Add some styling to the HTML output
+- [ ] Add filtering
+- [ ] Add sorting
 - [ ] Publish to Maven Central
 - [x] Use classes instead of strings to collect the data
 - [ ] Allow specifying the output file path and name
