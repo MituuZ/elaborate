@@ -4,7 +4,7 @@ public class AnalyzeMethod {
     private final String methodName;
     private String stringValue;
     private Integer integerValue;
-    // private Conditional condiditional = null;
+    private MethodConditional methodConditional = null;
 
     public AnalyzeMethod(String methodName, Object value) {
         this.methodName = methodName;
@@ -20,6 +20,10 @@ public class AnalyzeMethod {
     }
 
     public String getHtml(boolean printMethodName) {
+        if (methodConditional != null && !methodConditional.isConditionMet()) {
+            return "";
+        }
+
         var input = new StringBuilder();
         if (printMethodName)
             input.append("<h3>").append(getMethodName()).append("</h3>");
@@ -35,6 +39,10 @@ public class AnalyzeMethod {
     }
 
     public String toString(boolean printMethodName) {
+        if (methodConditional != null && !methodConditional.isConditionMet()) {
+            return "";
+        }
+
         if (printMethodName) {
             return getMethodName() + ": " + (getStringValue() != null ? getStringValue() : getIntegerValue()) + "\n";
         } else {
@@ -52,5 +60,9 @@ public class AnalyzeMethod {
 
     public Integer getIntegerValue() {
         return integerValue;
+    }
+
+    public void setMethodConditional(MethodConditional methodConditional) {
+        this.methodConditional = methodConditional;
     }
 }
