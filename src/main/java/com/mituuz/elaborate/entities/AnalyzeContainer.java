@@ -2,17 +2,40 @@ package com.mituuz.elaborate.entities;
 
 import kotlin.collections.ArrayDeque;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class AnalyzeContainer {
-    private final List<AnalyzeMethod> analyzeMethods = new ArrayDeque<>();
+    public final List<AnalyzeInstance> analyzeInstances = new ArrayList<>();
 
-    public void addResult(AnalyzeMethod analyzeMethod) {
-        analyzeMethods.add(analyzeMethod);
+    public void addInstance(AnalyzeInstance instance) {
+        analyzeInstances.add(instance);
     }
 
-    public List<AnalyzeMethod> getAnalyzeMethods() {
-        return analyzeMethods;
+    public List<AnalyzeInstance> getAnalyzeInstances() {
+        return analyzeInstances;
+    }
+
+    public static class AnalyzeInstance {
+        private final String title;
+
+        public AnalyzeInstance(String title) {
+            this.title = title;
+        }
+
+        private final List<AnalyzeMethod> analyzeMethods = new ArrayDeque<>();
+
+        public void addResult(AnalyzeMethod analyzeMethod) {
+            analyzeMethods.add(analyzeMethod);
+        }
+
+        public List<AnalyzeMethod> getAnalyzeMethods() {
+            return analyzeMethods;
+        }
+
+        public String getTitle() {
+            return title;
+        }
     }
 
     public static class AnalyzeMethod {

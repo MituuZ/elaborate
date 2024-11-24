@@ -28,8 +28,15 @@ public class HtmlGenerator {
         logger.info("Generating HTML report");
         createNewOutputFile(false);
         var input = new ArrayList<String>();
-        for (AnalyzeMethod analyzeMethod : analyzeContainer.getAnalyzeMethods()) {
-            input.add(analyzeMethod.getHtml(printMethodNames));
+        for (AnalyzeContainer.AnalyzeInstance analyzeInstance : analyzeContainer.getAnalyzeInstances()) {
+            input.add("<div class=\"instance\">");
+            input.add("<h2>" + analyzeInstance.getTitle() + "</h2>");
+            for (AnalyzeMethod analyzeMethod : analyzeInstance.getAnalyzeMethods()) {
+                input.add("<div class=\"method\">");
+                input.add(analyzeMethod.getHtml(printMethodNames));
+                input.add("</div>");
+            }
+            input.add("</div>");
         }
         writeToFile(input);
     }

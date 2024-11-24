@@ -1,6 +1,7 @@
 package com.mituuz.elaborate;
 
 import com.mituuz.elaborate.entities.AnalyzeContainer;
+import com.mituuz.elaborate.entities.AnalyzeContainer.AnalyzeInstance;
 import com.mituuz.elaborate.entities.AnalyzeContainer.AnalyzeMethod;
 import com.mituuz.elaborate.html.HtmlGenerator;
 import org.slf4j.Logger;
@@ -15,18 +16,24 @@ public class Elaborate<T> {
     private boolean generateHtml = false;
     private boolean printMethodNames = true;
     private Set<String> analyzeMethods = new LinkedHashSet<>();
+    private String titleMethod = "toString";
 
     public void analyze() {
         List<String> output = new ArrayList<>();
         var analyzeContainer = new AnalyzeContainer();
 
         for (T instance : analyzeClasses) {
+            var title = getTitle(instance);
+            var analyzeInstance = new AnalyzeInstance(title);
+            output.add(title + "\n");
             for (var method : analyzeMethods) {
                 var result = runMethod(instance, method);
                 var analyzeMethod = new AnalyzeMethod(method, result);
-                analyzeContainer.addResult(analyzeMethod);
+                analyzeInstance.addResult(analyzeMethod);
                 output.add(analyzeMethod.toString(printMethodNames));
             }
+            analyzeContainer.addInstance(analyzeInstance);
+            output.add("\n");
         }
         for (var line : output) {
             System.out.print(line);
@@ -35,6 +42,10 @@ public class Elaborate<T> {
             var htmlGenerator = new HtmlGenerator(printMethodNames);
             htmlGenerator.generate(analyzeContainer);
         }
+    }
+
+    public String getTitle(T instance) {
+        return runMethod(instance, titleMethod).toString();
     }
 
     public <S> S runMethod(T instance, String methodName) {
@@ -87,6 +98,10 @@ public class Elaborate<T> {
         Collections.addAll(analyzeMethods, methodNames);
     }
 
+    public void setTitleMethod(String titleMethod) {
+        this.titleMethod = titleMethod;
+    }
+
     /**
      * Print method names in the output<br>
      * Defaults to <code>true</code><br><br>
@@ -101,8 +116,9 @@ public class Elaborate<T> {
         Elaborate<String> elaborate = new Elaborate<>();
         elaborate.generateHtml(true);
         elaborate.addInstances(List.of("Hell", "Orld"));
-        elaborate.addAnalyzeMethods("toString", "toLowerCase", "length");
-        elaborate.printMethodNames(true);
+        elaborate.addAnalyzeMethods("toLowerCase", "length");
+        elaborate.setTitleMethod("toString");
+        elaborate.printMethodNames(false);
         elaborate.analyze();
     }
 }
