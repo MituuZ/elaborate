@@ -39,7 +39,8 @@ import java.util.List;
 
 public class HtmlGenerator {
     private static final Logger logger = LoggerFactory.getLogger(HtmlGenerator.class);
-    private final File outputFile = new File("build/result.html");
+    private static final String OUTPUT_FILE = "result.html";
+    private static final String OUTPUT_TABLE_FILE = "table.html";
 
     private boolean printMethodNames = false;
 
@@ -51,7 +52,7 @@ public class HtmlGenerator {
 
     public void generate(AnalyzeContainer analyzeContainer) {
         logger.info("Generating HTML report");
-        createNewOutputFile(false);
+        createNewOutputFile(false, OUTPUT_FILE);
         var input = new ArrayList<String>();
         for (AnalyzeInstance analyzeInstance : analyzeContainer.getAnalyzeInstances()) {
             input.add("<div class=\"instance\">");
@@ -63,12 +64,12 @@ public class HtmlGenerator {
             }
             input.add("</div>");
         }
-        writeToFile(input);
+        writeToFile(input, OUTPUT_FILE);
     }
 
     public void generateTable(AnalyzeContainer analyzeContainer) {
         logger.info("Generating HTML table report");
-        createNewOutputFile(false);
+        createNewOutputFile(false, OUTPUT_TABLE_FILE);
         var input = new ArrayList<String>();
         input.add("<table>");
         input.add("<tr>");
@@ -86,30 +87,32 @@ public class HtmlGenerator {
             input.add("</tr>");
         }
         input.add("</table>");
-        writeToFile(input);
+        writeToFile(input, OUTPUT_TABLE_FILE);
     }
 
-    private void writeToFile(List<String> input) {
+    private void writeToFile(List<String> input, String filename) {
+        File file = new File("build/" + filename);
         try {
-            Files.write(outputFile.toPath(), input, StandardCharsets.UTF_8);
+            Files.write(file.toPath(), input, StandardCharsets.UTF_8);
         } catch (IOException e) {
-            logger.error("Failed to write to output file: {}", outputFile.getName(), e);
+            logger.error("Failed to write to output file: {}", file.getName(), e);
         }
     }
 
-    private void createNewOutputFile(boolean visited) {
-        if (!outputFile.exists()) {
+    private void createNewOutputFile(boolean visited, String filename) {
+        File file = new File("build/" + filename);
+        if (!file.exists()) {
             try {
-                Files.createFile(outputFile.toPath());
+                Files.createFile(file.toPath());
             } catch (IOException e) {
-                logger.error("Could not create file {}", outputFile.getName(), e);
+                logger.error("Could not create file {}", file.getName(), e);
             }
         } else if (!visited) {
             try {
-                Files.delete(outputFile.toPath());
-                createNewOutputFile(true);
+                Files.delete(file.toPath());
+                createNewOutputFile(true, filename);
             } catch (IOException e) {
-                logger.error("Could not delete file {}", outputFile.getName(), e);
+                logger.error("Could not delete file {}", file.getName(), e);
             }
         }
     }
