@@ -67,3 +67,6 @@ For now, the output options are as follows:
   - Record or getter methods
 - [x] Add title configuration (which field/method to use as the element title)
 - [ ] Add field configurations (stylize results based on values)
+
+## License
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
