@@ -4,6 +4,19 @@ Visualize your Java classes
 ![](resources/img.png "An example of an HTML table output using hashCode as the title method")
 
 ## Usage
+### Using a jar file
+For now, you'll need to clone the repository and build the jar file yourself. 
+
+In the future I'm hoping to publish it to Maven Central.
+```shell
+git clone git@github.com:MituuZ/elaborate.git
+cd elaborate
+./gradlew jar
+```
+
+### Import the jar file
+Add the jar file to your project's dependencies and you're good to go.
+
 ### Create a new Elaborate instance with the class that you want to analyze
 ```java
 Elaborate<CustomClass> elaborate = new Elaborate<>();
