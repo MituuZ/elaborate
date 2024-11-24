@@ -37,6 +37,7 @@ tasks.jar {
     from("src/main/resources/static") {
         include("styles.css")
         into("static")
+        duplicatesStrategy = DuplicatesStrategy.INCLUDE
     }
 }
 

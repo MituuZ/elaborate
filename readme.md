@@ -60,6 +60,7 @@ For now, the output options are as follows:
 - Generate an HTML file with the results formatted as a table
 
 ## ToDo
+- [ ] Check that the css is copied correctly when using the jar file
 - [ ] Add some styling to the HTML output
 - [ ] Add filtering
 - [ ] Add sorting
