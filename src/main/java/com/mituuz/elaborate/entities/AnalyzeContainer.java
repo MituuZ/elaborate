@@ -101,10 +101,10 @@ public class AnalyzeContainer {
         }
 
         private void addValue(Object value) {
-            if (value instanceof String sVal) {
-                this.stringValue = sVal;
-            } else if (value instanceof Integer iVal) {
-                this.integerValue = iVal;
+            if (value instanceof String) {
+                this.stringValue = (String) value;
+            } else if (value instanceof Integer) {
+                this.integerValue = (Integer) value;
             }
         }
 
