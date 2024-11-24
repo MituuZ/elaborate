@@ -21,3 +21,21 @@ tr:nth-child(even) {
 tr:hover {
     background-color: #ddd;
 }
+
+a {
+    margin: 10px 0;
+    display: block;
+    color: #007bff;
+    text-decoration: none;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
+.instance {
+    margin: 10px 0;
+    padding: 0 8px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+}

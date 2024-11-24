@@ -156,10 +156,11 @@ public class Elaborate<T> {
     public static void main(String[] args) {
         Elaborate<String> elaborate = new Elaborate<>();
         elaborate.generateHtmlTable(true);
+        elaborate.generateHtml(true);
         elaborate.addInstances(List.of("Hell", "Orld"));
         elaborate.addAnalyzeMethods("toLowerCase", "length");
         elaborate.setTitleMethod("toString");
-        elaborate.printMethodNames(false);
+        elaborate.printMethodNames(true);
         elaborate.analyze();
     }
 }

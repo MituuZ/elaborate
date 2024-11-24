@@ -61,7 +61,7 @@ For now, the output options are as follows:
 
 ## ToDo
 - [ ] Check that the css is copied correctly when using the jar file
-- [ ] Add some styling to the HTML output
+- [x] Add some styling to the HTML output
 - [ ] Add filtering
 - [ ] Add sorting
 - [ ] Publish to Maven Central
