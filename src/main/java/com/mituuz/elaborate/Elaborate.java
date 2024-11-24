@@ -12,7 +12,7 @@ public class Elaborate<T> {
     private final List<T> analyzeClasses = new ArrayList<>();
     private boolean generateHtml = false;
     private boolean printMethodNames = true;
-    private Set<String> analyzeMethods = new HashSet<>();
+    private Set<String> analyzeMethods = new LinkedHashSet<>();
 
     public void analyze() {
         List<String> output = new ArrayList<>();
@@ -36,6 +36,9 @@ public class Elaborate<T> {
                 sb.append("\n");
                 output.add(sb.toString());
             }
+        }
+        for (var line : output) {
+            System.out.print(line);
         }
         if (generateHtml) {
             var htmlGenerator = new HtmlGenerator();
