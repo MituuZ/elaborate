@@ -1,6 +1,8 @@
 # Elaborate
 Visualize your Java classes
 
+Elaborate requires Java 11 or higher.
+
 ![](resources/img.png "An example of an HTML table output using hashCode as the title method")
 
 ## Usage
