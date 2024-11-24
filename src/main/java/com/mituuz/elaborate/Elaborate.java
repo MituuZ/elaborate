@@ -14,13 +14,14 @@ public class Elaborate<T> {
     private static final Logger logger = LoggerFactory.getLogger(Elaborate.class);
     private final List<T> analyzeClasses = new ArrayList<>();
     private boolean generateHtml = false;
+    private boolean generateHtmlTable = false;
     private boolean printMethodNames = true;
     private Set<String> analyzeMethods = new LinkedHashSet<>();
     private String titleMethod = "toString";
 
     public void analyze() {
         List<String> output = new ArrayList<>();
-        var analyzeContainer = new AnalyzeContainer();
+        var analyzeContainer = new AnalyzeContainer(analyzeMethods);
 
         for (T instance : analyzeClasses) {
             var title = getTitle(instance);
@@ -41,6 +42,10 @@ public class Elaborate<T> {
         if (generateHtml) {
             var htmlGenerator = new HtmlGenerator(printMethodNames);
             htmlGenerator.generate(analyzeContainer);
+        }
+        if (generateHtmlTable) {
+            var htmlGenerator = new HtmlGenerator(printMethodNames);
+            htmlGenerator.generateTable(analyzeContainer);
         }
     }
 
@@ -112,9 +117,13 @@ public class Elaborate<T> {
         this.printMethodNames = printMethodNames;
     }
 
+    public void generateHtmlTable(boolean generateHtmlTable) {
+        this.generateHtmlTable = generateHtmlTable;
+    }
+
     public static void main(String[] args) {
         Elaborate<String> elaborate = new Elaborate<>();
-        elaborate.generateHtml(true);
+        elaborate.generateHtmlTable(true);
         elaborate.addInstances(List.of("Hell", "Orld"));
         elaborate.addAnalyzeMethods("toLowerCase", "length");
         elaborate.setTitleMethod("toString");

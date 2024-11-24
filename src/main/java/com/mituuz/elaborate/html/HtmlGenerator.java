@@ -1,6 +1,7 @@
 package com.mituuz.elaborate.html;
 
 import com.mituuz.elaborate.entities.AnalyzeContainer;
+import com.mituuz.elaborate.entities.AnalyzeContainer.AnalyzeInstance;
 import com.mituuz.elaborate.entities.AnalyzeContainer.AnalyzeMethod;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -28,7 +29,7 @@ public class HtmlGenerator {
         logger.info("Generating HTML report");
         createNewOutputFile(false);
         var input = new ArrayList<String>();
-        for (AnalyzeContainer.AnalyzeInstance analyzeInstance : analyzeContainer.getAnalyzeInstances()) {
+        for (AnalyzeInstance analyzeInstance : analyzeContainer.getAnalyzeInstances()) {
             input.add("<div class=\"instance\">");
             input.add("<h2>" + analyzeInstance.getTitle() + "</h2>");
             for (AnalyzeMethod analyzeMethod : analyzeInstance.getAnalyzeMethods()) {
@@ -38,6 +39,29 @@ public class HtmlGenerator {
             }
             input.add("</div>");
         }
+        writeToFile(input);
+    }
+
+    public void generateTable(AnalyzeContainer analyzeContainer) {
+        logger.info("Generating HTML table report");
+        createNewOutputFile(false);
+        var input = new ArrayList<String>();
+        input.add("<table>");
+        input.add("<tr>");
+        input.add("<th>Instance</th>");
+        for (String analyzeMethod : analyzeContainer.getAnalyzeMethods()) {
+            input.add("<th>" + analyzeMethod + "</th>");
+        }
+        input.add("</tr>");
+        for (AnalyzeInstance analyzeInstance : analyzeContainer.getAnalyzeInstances()) {
+            input.add("<tr>");
+            input.add("<td>" + analyzeInstance.getTitle() + "</td>");
+            for (AnalyzeMethod analyzeMethod : analyzeInstance.getAnalyzeMethods()) {
+                input.add("<td>" + analyzeMethod.toString(false) + "</td>");
+            }
+            input.add("</tr>");
+        }
+        input.add("</table>");
         writeToFile(input);
     }
 

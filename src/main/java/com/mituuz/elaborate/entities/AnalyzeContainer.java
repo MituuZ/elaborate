@@ -4,9 +4,19 @@ import kotlin.collections.ArrayDeque;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 
 public class AnalyzeContainer {
     public final List<AnalyzeInstance> analyzeInstances = new ArrayList<>();
+    public final Set<String> analyzeMethods;
+
+    public AnalyzeContainer(Set<String> analyzeMethods) {
+        this.analyzeMethods = analyzeMethods;
+    }
+
+    public Set<String> getAnalyzeMethods() {
+        return analyzeMethods;
+    }
 
     public void addInstance(AnalyzeInstance instance) {
         analyzeInstances.add(instance);
