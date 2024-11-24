@@ -1,5 +1,6 @@
 plugins {
     kotlin("jvm") version "2.0.21"
+    application
 }
 
 group = "com.mituuz"
@@ -21,4 +22,28 @@ java {
 
 tasks.test {
     useJUnitPlatform()
+}
+
+tasks.register("copyStyles") {
+    doLast {
+        copy {
+            from("src/main/resources/static/styles.css")
+            into("build/static")
+        }
+    }
+}
+
+tasks.jar {
+    from("src/main/resources/static") {
+        include("styles.css")
+        into("static")
+    }
+}
+
+tasks.named("run") {
+    dependsOn("copyStyles")
+}
+
+application {
+    mainClass.set("com.mituuz.elaborate.Elaborate")
 }

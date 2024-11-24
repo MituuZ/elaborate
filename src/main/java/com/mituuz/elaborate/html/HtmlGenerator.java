@@ -53,7 +53,7 @@ public class HtmlGenerator {
     public void generate(AnalyzeContainer analyzeContainer) {
         logger.info("Generating HTML report");
         createNewOutputFile(false, OUTPUT_FILE);
-        var input = new ArrayList<String>();
+        var input = generateHead();
 
         if (analyzeContainer.generateHtmlTable()) {
             var link = "<a href=\"table.html\">Table Report</a>";
@@ -76,7 +76,7 @@ public class HtmlGenerator {
     public void generateTable(AnalyzeContainer analyzeContainer) {
         logger.info("Generating HTML table report");
         createNewOutputFile(false, OUTPUT_TABLE_FILE);
-        var input = new ArrayList<String>();
+        var input = generateHead();
 
         if (analyzeContainer.generateHtml()) {
             var link = "<a href=\"result.html\">Report</a>";
@@ -127,5 +127,13 @@ public class HtmlGenerator {
                 logger.error("Could not delete file {}", file.getName(), e);
             }
         }
+    }
+
+    private List<String> generateHead() {
+        var input = new ArrayList<String>();
+        input.add("<head>");
+        input.add("<link rel=\"stylesheet\" type=\"text/css\" href=\"static/styles.css\">");
+        input.add("</head>");
+        return input;
     }
 }
