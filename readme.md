@@ -27,6 +27,8 @@ Elaborate<CustomClass> elaborate = new Elaborate<>();
 ### Set Elaborate parameters
 Configure your Elaborate instance to output the desired information
 
+Filtering can be done using conditional methods.
+
 ```java
 Elaborate<String> elaborate = new Elaborate<>();
 elaborate.generateHtml(false); // Generate HTML file
@@ -62,7 +64,7 @@ For now, the output options are as follows:
 ## ToDo
 - [ ] Check that the css is copied correctly when using the jar file
 - [x] Add some styling to the HTML output
-- [ ] Add filtering
+- [x] Add filtering
 - [ ] Add sorting
 - [ ] Publish to Maven Central
 - [x] Use classes instead of strings to collect the data
