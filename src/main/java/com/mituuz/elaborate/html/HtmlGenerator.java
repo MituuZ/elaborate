@@ -26,7 +26,7 @@ package com.mituuz.elaborate.html;
 
 import com.mituuz.elaborate.entities.AnalyzeContainer;
 import com.mituuz.elaborate.entities.AnalyzeContainer.AnalyzeInstance;
-import com.mituuz.elaborate.entities.AnalyzeContainer.AnalyzeMethod;
+import com.mituuz.elaborate.entities.AnalyzeMethod;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
