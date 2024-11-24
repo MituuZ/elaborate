@@ -24,8 +24,6 @@ SOFTWARE.
 
 package com.mituuz.elaborate.entities;
 
-import kotlin.collections.ArrayDeque;
-
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;

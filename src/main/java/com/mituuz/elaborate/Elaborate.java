@@ -126,7 +126,8 @@ public class Elaborate<T> {
     }
 
     /**
-     * Add multiple methods to the list of methods to analyze
+     * Add multiple methods to the list of methods to analyze<br>
+     * These methods do not have any conditionals
      */
     public void addAnalyzeMethods(String... methodNames) {
         for (String methodName : methodNames) {
@@ -134,6 +135,10 @@ public class Elaborate<T> {
         }
     }
 
+    /**
+     * Add multiple methods to the list of methods to analyze<br>
+     * These methods support conditional rules that can be used to filter the results
+     */
     public void addConditionalMethods(AnalyzeMethod... analyzeMethods) {
         Collections.addAll(this.analyzeMethods, analyzeMethods);
     }
@@ -161,14 +166,14 @@ public class Elaborate<T> {
         elaborate.generateHtmlTable(true);
         elaborate.generateHtml(true);
         elaborate.addInstances(List.of("Hell", "Orld", "OF", "Hello there"));
-        elaborate.addAnalyzeMethods("toLowerCase");
+        elaborate.addAnalyzeMethods("toLowerCase", "toString");
 
         AnalyzeMethod conditionalMethod = new AnalyzeMethod("length");
-        var condition = new MethodConditional(INTEGER, 5, "", GREATER_THAN);
+        var condition = new MethodConditional(INTEGER, 3, "", GREATER_THAN);
         conditionalMethod.setMethodConditional(condition);
 
         elaborate.addConditionalMethods(conditionalMethod);
-        elaborate.setTitleMethod("toString");
+        elaborate.setTitleMethod("hashCode");
         elaborate.printMethodNames(true);
 
         elaborate.analyze();
