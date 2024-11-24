@@ -161,6 +161,7 @@ public class Elaborate<T> {
         elaborate.addAnalyzeMethods("toLowerCase", "length");
         elaborate.setTitleMethod("toString");
         elaborate.printMethodNames(true);
+
         elaborate.analyze();
     }
 }
