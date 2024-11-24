@@ -66,6 +66,10 @@ public class Elaborate<T> {
         this.analyzeClasses.add(instance);
     }
 
+    /**
+     * Add multiple instances to the list of class instances to analyze
+     * @param instances Instances of the class to analyze
+     */
     public void addInstances(List<T> instances) {
         this.analyzeClasses.addAll(instances);
     }
@@ -78,14 +82,26 @@ public class Elaborate<T> {
         this.generateHtml = generateHtml;
     }
 
+    /**
+     * Set the methods to analyze
+     */
     public void setAnalyzeMethods(String... methodNames) {
         analyzeMethods = Set.of(methodNames);
     }
 
+    /**
+     * Add multiple methods to the list of methods to analyze
+     */
     public void addAnalyzeMethods(String... methodNames) {
         Collections.addAll(analyzeMethods, methodNames);
     }
 
+    /**
+     * Print method names in the output<br>
+     * Defaults to <code>true</code><br><br>
+     * Prints the method name before the result of the method<br>
+     * <code>toString: Hello</code>
+     */
     public void printMethodNames(boolean printMethodNames) {
         this.printMethodNames = printMethodNames;
     }
