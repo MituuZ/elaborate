@@ -62,7 +62,15 @@ For now, the output options are as follows:
 - Generate an HTML file with the results formatted as a table
 
 ## ToDo
+- [ ] Allow disabling print
+- [ ] Allow renaming title method in HTML table
+- [ ] Change boolean parameters to sets with default values and no parameters
+- [ ] Inline default css
+  - Update the picture on readme
+- [ ] Add support for custom css
+  - Try to load it after inlining the default css
 - [ ] Check that the css is copied correctly when using the jar file
+  - Is not
 - [x] Add some styling to the HTML output
 - [x] Add filtering
 - [ ] Add sorting
@@ -72,6 +80,8 @@ For now, the output options are as follows:
 - [ ] Add support for fields instead of only methods 
   - i.e. check for the default methods based on the field name
   - Record or getter methods
+- [ ] Add support for known methods
+  - e.g. `size`, `isBlank`
 - [x] Add title configuration (which field/method to use as the element title)
 - [ ] Add field configurations (stylize results based on values)
 
