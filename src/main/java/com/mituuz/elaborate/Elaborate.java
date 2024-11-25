@@ -121,8 +121,12 @@ public class Elaborate<T> {
         return this.analyzeClasses;
     }
 
-    public void generateHtml(boolean generateHtml) {
-        this.generateHtml = generateHtml;
+    /**
+     * Generate HTML output<br>
+     * Defaults to <code>false</code>
+     */
+    public void generateHtml() {
+        this.generateHtml = true;
     }
 
     /**
@@ -153,18 +157,22 @@ public class Elaborate<T> {
      * Prints the method name before the result of the method<br>
      * <code>toString: Hello</code>
      */
-    public void printMethodNames(boolean printMethodNames) {
-        this.printMethodNames = printMethodNames;
+    public void skipMethodNames() {
+        this.printMethodNames = false;
     }
 
-    public void generateHtmlTable(boolean generateHtmlTable) {
-        this.generateHtmlTable = generateHtmlTable;
+    /**
+     * Generate HTML table output<br>
+     * Defaults to <code>false</code>
+     */
+    public void generateHtmlTable() {
+        this.generateHtmlTable = true;
     }
 
     public static void main(String[] args) {
         Elaborate<String> elaborate = new Elaborate<>();
-        elaborate.generateHtmlTable(true);
-        elaborate.generateHtml(true);
+        elaborate.generateHtmlTable();
+        elaborate.generateHtml();
         elaborate.addInstances(List.of("Hell", "Orld", "OF", "Hello there"));
         elaborate.addAnalyzeMethods("toLowerCase", "toString");
 
@@ -174,7 +182,6 @@ public class Elaborate<T> {
 
         elaborate.addConditionalMethods(conditionalMethod);
         elaborate.setTitleMethod("hashCode");
-        elaborate.printMethodNames(true);
 
         elaborate.analyze();
     }

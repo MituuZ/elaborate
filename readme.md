@@ -64,7 +64,7 @@ For now, the output options are as follows:
 ## ToDo
 - [ ] Allow disabling print
 - [ ] Allow renaming title method in HTML table
-- [ ] Change boolean parameters to sets with default values and no parameters
+- [x] Change boolean parameters to sets with default values and no parameters
 - [ ] Inline default css
   - Update the picture on readme
 - [ ] Add support for custom css
