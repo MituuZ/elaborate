@@ -48,7 +48,8 @@ public class HtmlGenerator {
         this.printMethodNames = printMethodNames;
     }
 
-    public HtmlGenerator() { }
+    public HtmlGenerator() {
+    }
 
     public void generate(AnalyzeContainer analyzeContainer) {
         logger.info("Generating HTML report");
@@ -136,7 +137,49 @@ public class HtmlGenerator {
     private List<String> generateHead() {
         var input = new ArrayList<String>();
         input.add("<head>");
-        input.add("<link rel=\"stylesheet\" type=\"text/css\" href=\"static/styles.css\">");
+        input.add("<style>");
+        input.add("table {");
+        input.add("input.add(table {");
+        input.add("    min-width: 30%;");
+        input.add("    border-collapse: collapse;");
+        input.add("}");
+        input.add("");
+        input.add("th, td {");
+        input.add("    border: 1px solid #ddd;");
+        input.add("    padding: 8px;");
+        input.add("    text-align: left;");
+        input.add("}");
+        input.add("");
+        input.add("th {");
+        input.add("    background-color: #f2f2f2;");
+        input.add("    font-weight: bold;");
+        input.add("}");
+        input.add("");
+        input.add("tr:nth-child(even) {");
+        input.add("    background-color: #f9f9f9;");
+        input.add("}");
+        input.add("");
+        input.add("tr:hover {");
+        input.add("    background-color: #ddd;");
+        input.add("}");
+        input.add("");
+        input.add("a {");
+        input.add("    margin: 10px 0;");
+        input.add("    display: block;");
+        input.add("    color: #007bff;");
+        input.add("    text-decoration: none;");
+        input.add("}");
+        input.add("");
+        input.add("a:hover {");
+        input.add("    text-decoration: underline;");
+        input.add("}");
+        input.add("");
+        input.add(".instance {");
+        input.add("    margin: 10px 0;");
+        input.add("    padding: 0 8px;");
+        input.add("    border: 1px solid #ddd;");
+        input.add("    border-radius: 5px;");
+        input.add("}");
         input.add("</head>");
         return input;
     }
