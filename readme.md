@@ -62,7 +62,7 @@ For now, the output options are as follows:
 - Generate an HTML file with the results formatted as a table
 
 ## ToDo
-- [ ] Allow disabling print
+- [x] Allow disabling stdout printing
 - [ ] Allow renaming title method in HTML table
 - [x] Change boolean parameters to sets with default values and no parameters
 - [ ] Inline default css

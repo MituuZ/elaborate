@@ -45,10 +45,11 @@ public class Elaborate<T> {
     private static final Logger logger = LoggerFactory.getLogger(Elaborate.class);
     private final List<T> analyzeClasses = new ArrayList<>();
     private final AnalyzeContainer analyzeContainer = new AnalyzeContainer();
+    private final Set<AnalyzeMethod> analyzeMethods = new LinkedHashSet<>();
     private boolean generateHtml = false;
     private boolean generateHtmlTable = false;
     private boolean printMethodNames = true;
-    private Set<AnalyzeMethod> analyzeMethods = new LinkedHashSet<>();
+    private boolean printToStdOut = true;
     private String titleMethod = "toString";
 
     public void analyze() {
@@ -71,9 +72,7 @@ public class Elaborate<T> {
             analyzeContainer.addInstance(analyzeInstance);
             output.add("\n");
         }
-        for (var line : output) {
-            System.out.print(line);
-        }
+        printToStdOut(output);
         if (generateHtml) {
             var htmlGenerator = new HtmlGenerator(printMethodNames);
             htmlGenerator.generate(analyzeContainer);
@@ -82,6 +81,13 @@ public class Elaborate<T> {
             var htmlGenerator = new HtmlGenerator(printMethodNames);
             htmlGenerator.generateTable(analyzeContainer);
         }
+    }
+
+    private void printToStdOut(List<String> output) {
+        if (printToStdOut)
+            for (var line : output) {
+                System.out.print(line);
+            }
     }
 
     public String getTitle(T instance) {
@@ -152,13 +158,21 @@ public class Elaborate<T> {
     }
 
     /**
-     * Print method names in the output<br>
-     * Defaults to <code>true</code><br><br>
-     * Prints the method name before the result of the method<br>
+     * Setting this flag skips printing the method names to the output<br>
+     * By default, method names are printed<br><br>
+     * Method names are inserted before the result of the method<br>
      * <code>toString: Hello</code>
      */
     public void skipMethodNames() {
         this.printMethodNames = false;
+    }
+
+    /**
+     * Setting this flag skips printing the output to the standard output<br>
+     * By default, the output is printed to the standard output
+     */
+    public void skipPrint() {
+        this.printToStdOut = false;
     }
 
     /**
