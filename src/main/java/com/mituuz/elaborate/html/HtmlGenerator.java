@@ -180,7 +180,6 @@ public class HtmlGenerator {
         input.add("    border: 1px solid #ddd;");
         input.add("    border-radius: 5px;");
         input.add("}");
-        input.add("</style>");
         input.add("</head>");
         return input;
     }
