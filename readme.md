@@ -65,13 +65,16 @@ Filtering can be done using conditional methods.
 
 ```java
 Elaborate<String> elaborate = new Elaborate<>();
-elaborate.generateHtml(false); // Generate HTML file
+elaborate.generateHtml(); // Generate an HTML file
+elaborate.generateHtmlTable(); // Generate an HTML table file
 elaborate.addInstances(List.of("Hello", "Orld")); // Add the class instances to analyze
 elaborate.addAnalyzeMethods("toString", "toLowerCase", "length"); // Add the methods to analyze
-elaborate.printMethodNames(true); // Print the method names in the HTML file
 ```
 
-This setup will print the following content:
+### Output
+This setup will provide the following output:
+
+Prints to the console:
 ```
 toString: Hello
 toLowerCase: hello
@@ -81,6 +84,11 @@ toString: Orld
 toLowerCase: orld
 length: 4
 ```
+
+Generates the following files:
+- `results.html`
+- `table.html`
+- `styles.css`
 
 ### Run the analysis
 ```java
