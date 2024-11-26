@@ -46,7 +46,7 @@ public class CsvGenerator {
         writeToFile(output, DEFAULT_CSV_FILE_NAME);
     }
 
-    private List<String> generateCsvLines(AnalyzeContainer analyzeContainer) {
+    public List<String> generateCsvLines(AnalyzeContainer analyzeContainer) {
         List<String> output = new ArrayList<>();
         if (headers)
             writeHeaders(analyzeContainer, output);
@@ -76,5 +76,13 @@ public class CsvGenerator {
             visitedMethods++;
         }
         output.add(headerLine.toString());
+    }
+
+    /**
+     * Skip writing headers to the CSV file.<br>
+     * Defaults to <code>false</code>
+     */
+    public void skipHeaders() {
+        this.headers = false;
     }
 }

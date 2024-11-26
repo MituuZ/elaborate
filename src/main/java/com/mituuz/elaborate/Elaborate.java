@@ -47,7 +47,7 @@ public class Elaborate<T> {
     private static final Logger logger = LoggerFactory.getLogger(Elaborate.class);
     private final List<T> analyzeClasses = new ArrayList<>();
     private final AnalyzeContainer analyzeContainer = new AnalyzeContainer();
-    private final Set<AnalyzeMethod> analyzeMethods = new LinkedHashSet<>();
+    private final List<AnalyzeMethod> analyzeMethods = new ArrayList<>();
     private boolean generateHtml = false;
     private boolean generateHtmlTable = false;
     private boolean generateCsv = false;

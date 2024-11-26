@@ -26,11 +26,10 @@ package com.mituuz.elaborate.entities;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Set;
 
 public class AnalyzeContainer {
     private final List<AnalyzeInstance> analyzeInstances = new ArrayList<>();
-    private Set<AnalyzeMethod> analyzeMethods;
+    private List<AnalyzeMethod> analyzeMethods;
     private boolean generateHtml = false;
     private boolean generateHtmlTable = false;
 
@@ -50,11 +49,11 @@ public class AnalyzeContainer {
         this.generateHtmlTable = generateHtmlTable;
     }
 
-    public void setAnalyzeMethods(Set<AnalyzeMethod> analyzeMethods) {
+    public void setAnalyzeMethods(List<AnalyzeMethod> analyzeMethods) {
         this.analyzeMethods = analyzeMethods;
     }
 
-    public Set<AnalyzeMethod> getAnalyzeMethods() {
+    public List<AnalyzeMethod> getAnalyzeMethods() {
         return analyzeMethods;
     }
 
