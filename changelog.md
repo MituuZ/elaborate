@@ -1,5 +1,5 @@
 # Changelog
-## 0.1.3
+## 0.2.0
 - Implement a builder for Elaborate
 
 ## 0.1.2

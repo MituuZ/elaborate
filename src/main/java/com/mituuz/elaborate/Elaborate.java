@@ -33,6 +33,7 @@ import com.mituuz.elaborate.entities.AnalyzeContainer.AnalyzeInstance;
 import com.mituuz.elaborate.entities.AnalyzeMethod;
 import com.mituuz.elaborate.entities.AnalyzeMethod.MethodConditional;
 import com.mituuz.elaborate.html.HtmlGenerator;
+import com.mituuz.elaborate.util.ElaborateBuilder;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -227,48 +228,5 @@ public class Elaborate<T> {
      */
     public static <T> ElaborateBuilder<T> builder() {
         return new ElaborateBuilder<>();
-    }
-
-    public static class ElaborateBuilder<T> {
-        private final Elaborate<T> elaborate = new Elaborate<>();
-
-        public ElaborateBuilder<T> generateHtml() {
-            elaborate.generateHtml();
-            return this;
-        }
-
-        public ElaborateBuilder<T> generateHtmlTable() {
-            elaborate.generateHtmlTable();
-            return this;
-        }
-
-        public ElaborateBuilder<T> generateCsvReport() {
-            elaborate.generateCsvReport();
-            return this;
-        }
-
-        public ElaborateBuilder<T> addInstances(List<T> instances) {
-            elaborate.addInstances(instances);
-            return this;
-        }
-
-        public ElaborateBuilder<T> addAnalyzeMethods(String... methodNames) {
-            elaborate.addAnalyzeMethods(methodNames);
-            return this;
-        }
-
-        public ElaborateBuilder<T> addConditionalMethods(AnalyzeMethod... analyzeMethods) {
-            elaborate.addConditionalMethods(analyzeMethods);
-            return this;
-        }
-
-        public ElaborateBuilder<T> setTitleMethod(String titleMethod) {
-            elaborate.setTitleMethod(titleMethod);
-            return this;
-        }
-
-        public Elaborate<T> build() {
-            return this.elaborate;
-        }
     }
 }
