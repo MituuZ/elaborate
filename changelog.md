@@ -1,4 +1,8 @@
 # Changelog
+## 0.1.1
+- Many minor changes and improvements
+- Create a default css file for the generated HTML
+
 ## 0.1.0
 - Initial release
 - Implement basic functionality:

@@ -4,7 +4,7 @@ plugins {
 }
 
 group = "com.mituuz"
-version = "0.1.0"
+version = "0.1.1"
 
 repositories {
     mavenCentral()
@@ -22,27 +22,6 @@ java {
 
 tasks.test {
     useJUnitPlatform()
-}
-
-tasks.register("copyStyles") {
-    doLast {
-        copy {
-            from("src/main/resources/static/styles.css")
-            into("build/static")
-        }
-    }
-}
-
-tasks.jar {
-    from("src/main/resources/static") {
-        include("styles.css")
-        into("static")
-        duplicatesStrategy = DuplicatesStrategy.INCLUDE
-    }
-}
-
-tasks.named("run") {
-    dependsOn("copyStyles")
 }
 
 application {

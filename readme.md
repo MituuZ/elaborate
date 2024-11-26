@@ -64,7 +64,9 @@ For now, the output options are as follows:
 ## ToDo
 - [x] Allow disabling stdout printing
 - [ ] Allow renaming title method in HTML table
+- [ ] Create a builder class
 - [x] Change boolean parameters to sets with default values and no parameters
+- [ ] Generate unique names for files
 - [ ] Inline default css
   - Update the picture on readme
 - [ ] Add support for custom css

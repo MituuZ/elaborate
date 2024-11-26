@@ -39,16 +39,42 @@ import java.util.List;
 
 public class HtmlGenerator {
     private static final Logger logger = LoggerFactory.getLogger(HtmlGenerator.class);
+    private static final String DEFAULT_OUTPUT_DIR = "build/";
     private static final String OUTPUT_FILE = "result.html";
     private static final String OUTPUT_TABLE_FILE = "table.html";
+    private static final String OUTPUT_CSS_FILE = "styles.css";
+    private static final String DEFAULT_CSS = "/static/styles.css";
 
     private boolean printMethodNames = false;
 
     public HtmlGenerator(boolean printMethodNames) {
         this.printMethodNames = printMethodNames;
+        createCssFile();
     }
 
     public HtmlGenerator() { }
+
+    private void createCssFile() {
+        createNewOutputFile(false, OUTPUT_CSS_FILE);
+        String css = readDefaultCss();
+        writeToFile(List.of(css), OUTPUT_CSS_FILE);
+    }
+
+    /**
+     * Reads default css file from resources
+     */
+    private String readDefaultCss() {
+        try (var stream = getClass().getResourceAsStream(DEFAULT_CSS)) {
+            if (stream == null) {
+                logger.error("Could not find default css file");
+                return "";
+            }
+            return new String(stream.readAllBytes(), StandardCharsets.UTF_8);
+        } catch (IOException e) {
+            logger.error("Could not read default css file", e);
+            return "";
+        }
+    }
 
     public void generate(AnalyzeContainer analyzeContainer) {
         logger.info("Generating HTML report");
@@ -107,7 +133,7 @@ public class HtmlGenerator {
     }
 
     private void writeToFile(List<String> input, String filename) {
-        File file = new File("build/" + filename);
+        File file = new File(DEFAULT_OUTPUT_DIR + filename);
         try {
             Files.write(file.toPath(), input, StandardCharsets.UTF_8);
         } catch (IOException e) {
@@ -116,7 +142,7 @@ public class HtmlGenerator {
     }
 
     private void createNewOutputFile(boolean visited, String filename) {
-        File file = new File("build/" + filename);
+        File file = new File(DEFAULT_OUTPUT_DIR + filename);
         if (!file.exists()) {
             try {
                 Files.createFile(file.toPath());
@@ -136,7 +162,7 @@ public class HtmlGenerator {
     private List<String> generateHead() {
         var input = new ArrayList<String>();
         input.add("<head>");
-        input.add("<link rel=\"stylesheet\" type=\"text/css\" href=\"static/styles.css\">");
+        input.add("<link rel=\"stylesheet\" type=\"text/css\" href=\"styles.css\">");
         input.add("</head>");
         return input;
     }
