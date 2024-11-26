@@ -1,4 +1,7 @@
 # Changelog
+## 0.1.3
+- Implement a builder for Elaborate
+
 ## 0.1.2
 - Add an option to publish to the local maven repository
 

@@ -204,19 +204,71 @@ public class Elaborate<T> {
     }
 
     public static void main(String[] args) {
-        Elaborate<String> elaborate = new Elaborate<>();
-        elaborate.generateHtmlTable();
-        elaborate.generateHtml();
-        elaborate.addInstances(List.of("Hell", "Orld", "OF", "Hello there"));
-        elaborate.addAnalyzeMethods("toLowerCase", "toString");
+        Elaborate<String> elaborate = Elaborate.<String>builder()
+                .generateHtml()
+                .generateHtmlTable()
+                .addInstances(List.of("Hell", "Orld", "OF", "Hello there"))
+                .addAnalyzeMethods("toLowerCase", "toString")
+                .setTitleMethod("hashCode")
+                .build();
 
         AnalyzeMethod conditionalMethod = new AnalyzeMethod("length");
         var condition = new MethodConditional(INTEGER, 3, "", GREATER_THAN);
         conditionalMethod.setMethodConditional(condition);
 
         elaborate.addConditionalMethods(conditionalMethod);
-        elaborate.setTitleMethod("hashCode");
 
         elaborate.analyze();
+    }
+
+    /**
+     * To ensure the correct type, use the builder in the following way:<br>
+     * <code>Elaborate&lt;String&gt; elaborate = Elaborate.&lt;String&gt;builder()</code>
+     */
+    public static <T> ElaborateBuilder<T> builder() {
+        return new ElaborateBuilder<>();
+    }
+
+    public static class ElaborateBuilder<T> {
+        private final Elaborate<T> elaborate = new Elaborate<>();
+
+        public ElaborateBuilder<T> generateHtml() {
+            elaborate.generateHtml();
+            return this;
+        }
+
+        public ElaborateBuilder<T> generateHtmlTable() {
+            elaborate.generateHtmlTable();
+            return this;
+        }
+
+        public ElaborateBuilder<T> generateCsvReport() {
+            elaborate.generateCsvReport();
+            return this;
+        }
+
+        public ElaborateBuilder<T> addInstances(List<T> instances) {
+            elaborate.addInstances(instances);
+            return this;
+        }
+
+        public ElaborateBuilder<T> addAnalyzeMethods(String... methodNames) {
+            elaborate.addAnalyzeMethods(methodNames);
+            return this;
+        }
+
+        public ElaborateBuilder<T> addConditionalMethods(AnalyzeMethod... analyzeMethods) {
+            elaborate.addConditionalMethods(analyzeMethods);
+            return this;
+        }
+
+        public ElaborateBuilder<T> setTitleMethod(String titleMethod) {
+            elaborate.setTitleMethod(titleMethod);
+            return this;
+        }
+
+        public Elaborate<T> build() {
+            return this.elaborate;
+        }
     }
 }
