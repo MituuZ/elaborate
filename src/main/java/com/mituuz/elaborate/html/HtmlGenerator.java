@@ -76,11 +76,12 @@ public class HtmlGenerator {
         }
     }
 
-    public void generate(AnalyzeContainer analyzeContainer) {
+    public void generateHtmlReport(AnalyzeContainer analyzeContainer) {
         logger.info("Generating HTML report");
         createNewOutputFile(false, OUTPUT_FILE);
         var input = generateHead();
 
+        // If we also generate an HTML table report, add a link to it
         if (analyzeContainer.generateHtmlTable()) {
             var link = "<a href=\"table.html\">Table Report</a>";
             input.add(link);
@@ -101,11 +102,12 @@ public class HtmlGenerator {
         writeToFile(input, OUTPUT_FILE);
     }
 
-    public void generateTable(AnalyzeContainer analyzeContainer) {
+    public void generateHtmlTableReport(AnalyzeContainer analyzeContainer) {
         logger.info("Generating HTML table report");
         createNewOutputFile(false, OUTPUT_TABLE_FILE);
         var input = generateHead();
 
+        // If we also generate an HTML report, add a link to it
         if (analyzeContainer.generateHtml()) {
             var link = "<a href=\"result.html\">Report</a>";
             input.add(link);

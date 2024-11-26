@@ -75,11 +75,11 @@ public class Elaborate<T> {
         printToStdOut(output);
         if (generateHtml) {
             var htmlGenerator = new HtmlGenerator(printMethodNames);
-            htmlGenerator.generate(analyzeContainer);
+            htmlGenerator.generateHtmlReport(analyzeContainer);
         }
         if (generateHtmlTable) {
             var htmlGenerator = new HtmlGenerator(printMethodNames);
-            htmlGenerator.generateTable(analyzeContainer);
+            htmlGenerator.generateHtmlTableReport(analyzeContainer);
         }
     }
 
