@@ -1,5 +1,12 @@
 # Elaborate
-Visualize your Java classes
+Visualize your Java classes.
+
+Instead of printing results to the console, use Elaborate to generate an HTML file with the results. 
+This is useful when you have a large number of instances and methods to analyze, 
+providing a better overview of the results.
+
+It offers a more convenient alternative to printing to the console or using a debugger. 
+With the added benefit of creating a permanent record of the analysis.
 
 Elaborate requires Java 11 or higher.
 
