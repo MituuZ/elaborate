@@ -8,7 +8,7 @@ Elaborate requires Java 11 or higher.
 ## Installation
 For now, only local installations are supported. In the future, I'm hoping to publish it to Maven Central.
 
-### Using a local installation
+### Publishing to Maven Local
 By publishing the jar file to Maven Local, you can use it as a dependency in your projects.
 
 ```shell
