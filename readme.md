@@ -96,27 +96,30 @@ Generates the following files:
 - `styles.css`
 
 ## ToDo
-- [x] Allow disabling stdout printing
+- [ ] Create a csv file
+- [ ] Separate conditionals to separate classes for better constructors
 - [ ] Allow renaming title method in HTML table
 - [ ] Create a builder class
-- [x] Change boolean parameters to sets with default values and no parameters
-- [ ] Generate unique names for files
-- [ ] Add support for custom css
-  - Try to load it after inlining the default css
-- [x] Check that the css is copied correctly when using the jar file
-- [x] Add some styling to the HTML output
-- [x] Add filtering
 - [ ] Add sorting
 - [ ] Publish to Maven Central
-- [x] Use classes instead of strings to collect the data
 - [ ] Allow specifying the output file path and name
-- [ ] Add support for fields instead of only methods 
+- [ ] Add support for fields instead of only methods
   - i.e. check for the default methods based on the field name
   - Record or getter methods
 - [ ] Add support for known methods
   - e.g. `size`, `isBlank`
-- [x] Add title configuration (which field/method to use as the element title)
+- [ ] Generate unique names for files
+- [ ] Add support for custom css
+  - Try to load it after inlining the default css
 - [ ] Add field configurations (stylize results based on values)
+- [x] Check that the css is copied correctly when using the jar file
+- [x] Generate a css file
+- [x] Add some styling to the HTML output
+- [x] Add filtering
+- [x] Allow disabling stdout printing
+- [x] Use classes instead of strings to collect the data
+- [x] Add title configuration (which field/method to use as the element title)
+- [x] Change boolean parameters to sets with default values and no parameters
 
 ## License
 This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
