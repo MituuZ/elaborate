@@ -68,9 +68,9 @@ public class AnalyzeMethod {
 
     public String toString(boolean printMethodName) {
         if (printMethodName) {
-            return getMethodName() + ": " + (getStringValue() != null ? getStringValue() : getIntegerValue()) + "\n";
+            return getMethodName() + ": " + (getStringValue() != null ? getStringValue() : getIntegerValue());
         } else {
-            return (getStringValue() != null ? getStringValue() : getIntegerValue()) + "\n";
+            return (getStringValue() != null ? getStringValue() : getIntegerValue().toString());
         }
     }
 

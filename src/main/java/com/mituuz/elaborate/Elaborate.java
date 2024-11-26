@@ -75,13 +75,13 @@ public class Elaborate<T> {
         }
     }
 
-    private List<String> processInstances() {
+    public List<String> processInstances() {
         final List<String> output = new ArrayList<>();
 
         for (T instance : analyzeClasses) {
             var title = getTitle(instance);
             var analyzeInstance = new AnalyzeInstance(title);
-            output.add(title + "\n");
+            output.add(title);
             for (var analyzeMethod : analyzeMethods) {
                 var method = new AnalyzeMethod(analyzeMethod);
                 var result = runMethod(instance, method.getMethodName());
@@ -99,7 +99,7 @@ public class Elaborate<T> {
     private void printToStdOut(List<String> output) {
         if (printToStdOut)
             for (var line : output) {
-                System.out.print(line);
+                System.out.println(line);
             }
     }
 
