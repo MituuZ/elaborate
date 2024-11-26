@@ -71,6 +71,11 @@ elaborate.addInstances(List.of("Hello", "Orld")); // Add the class instances to 
 elaborate.addAnalyzeMethods("toString", "toLowerCase", "length"); // Add the methods to analyze
 ```
 
+### Run the analysis
+```java
+elaborate.analyze(); // Analyze the class
+```
+
 ### Output
 This setup will provide the following output:
 
@@ -89,19 +94,6 @@ Generates the following files:
 - `results.html`
 - `table.html`
 - `styles.css`
-
-### Run the analysis
-```java
-elaborate.analyze(); // Analyze the class
-```
-
-## Output
-By default, the class instances use the `toString` method as the title of the element.
-
-For now, the output options are as follows:
-- Print the results to the console
-- Generate an HTML file with the results
-- Generate an HTML file with the results formatted as a table
 
 ## ToDo
 - [x] Allow disabling stdout printing
