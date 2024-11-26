@@ -3,7 +3,7 @@ Visualize your Java classes
 
 Elaborate requires Java 11 or higher.
 
-![](resources/img.png "An example of an HTML table output using hashCode as the title method")
+![](resources/html-table-example.png "An example of an HTML table output using hashCode as the title method")
 
 ## Installation
 For now, only local installations are supported. In the future, I'm hoping to publish it to Maven Central.
