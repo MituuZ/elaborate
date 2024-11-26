@@ -71,11 +71,12 @@ Configure your Elaborate instance to output the desired information
 Filtering can be done using conditional methods.
 
 ```java
-Elaborate<String> elaborate = new Elaborate<>();
-elaborate.generateHtml(); // Generate an HTML file
-elaborate.generateHtmlTable(); // Generate an HTML table file
-elaborate.addInstances(List.of("Hello", "Orld")); // Add the class instances to analyze
-elaborate.addAnalyzeMethods("toString", "toLowerCase", "length"); // Add the methods to analyze
+Elaborate<String> elaborate = Elaborate.<String>builder()
+    .generateHtml(); // Generate an HTML file
+    .generateHtmlTable(); // Generate an HTML table file
+    .addInstances(List.of("Hello", "Orld")); // Add the class instances to analyze
+    .addAnalyzeMethods("toString", "toLowerCase", "length") // Add the methods to analyze
+    .build();
 ```
 
 ### Run the analysis
