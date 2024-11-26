@@ -53,10 +53,23 @@ public class Elaborate<T> {
     private String titleMethod = "toString";
 
     public void analyze() {
-        List<String> output = new ArrayList<>();
         analyzeContainer.setAnalyzeMethods(analyzeMethods);
         analyzeContainer.generateHtmlTable(generateHtmlTable);
         analyzeContainer.generateHtml(generateHtml);
+
+        List<String> output = processInstances();
+
+        printToStdOut(output);
+
+        var htmlGenerator = new HtmlGenerator(printMethodNames);
+        if (generateHtml)
+            htmlGenerator.generateHtmlReport(analyzeContainer);
+        if (generateHtmlTable)
+            htmlGenerator.generateHtmlTableReport(analyzeContainer);
+    }
+
+    private List<String> processInstances() {
+        final List<String> output = new ArrayList<>();
 
         for (T instance : analyzeClasses) {
             var title = getTitle(instance);
@@ -72,15 +85,8 @@ public class Elaborate<T> {
             analyzeContainer.addInstance(analyzeInstance);
             output.add("\n");
         }
-        printToStdOut(output);
-        if (generateHtml) {
-            var htmlGenerator = new HtmlGenerator(printMethodNames);
-            htmlGenerator.generateHtmlReport(analyzeContainer);
-        }
-        if (generateHtmlTable) {
-            var htmlGenerator = new HtmlGenerator(printMethodNames);
-            htmlGenerator.generateHtmlTableReport(analyzeContainer);
-        }
+
+        return output;
     }
 
     private void printToStdOut(List<String> output) {
