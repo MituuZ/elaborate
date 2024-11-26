@@ -31,7 +31,7 @@ import com.mituuz.elaborate.csv.CsvGenerator;
 import com.mituuz.elaborate.entities.AnalyzeContainer;
 import com.mituuz.elaborate.entities.AnalyzeContainer.AnalyzeInstance;
 import com.mituuz.elaborate.entities.AnalyzeMethod;
-import com.mituuz.elaborate.entities.AnalyzeMethod.MethodConditional;
+import com.mituuz.elaborate.entities.MethodConditional;
 import com.mituuz.elaborate.html.HtmlGenerator;
 import com.mituuz.elaborate.util.ElaborateBuilder;
 import org.slf4j.Logger;
@@ -40,8 +40,8 @@ import org.slf4j.LoggerFactory;
 import java.lang.reflect.InvocationTargetException;
 import java.util.*;
 
-import static com.mituuz.elaborate.entities.AnalyzeMethod.ConditionType.INTEGER;
-import static com.mituuz.elaborate.entities.AnalyzeMethod.ConditionValueConditional.GREATER_THAN;
+import static com.mituuz.elaborate.entities.MethodConditional.ConditionType.INTEGER;
+import static com.mituuz.elaborate.entities.MethodConditional.ConditionValueConditional.GREATER_THAN;
 
 public class Elaborate<T> {
     private static final Logger logger = LoggerFactory.getLogger(Elaborate.class);
