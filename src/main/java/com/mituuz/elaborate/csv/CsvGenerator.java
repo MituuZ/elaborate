@@ -27,11 +27,6 @@ import com.mituuz.elaborate.entities.AnalyzeContainer;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import java.io.BufferedWriter;
-import java.io.IOException;
-import java.nio.charset.StandardCharsets;
-import java.nio.file.Files;
-import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -45,31 +40,30 @@ public class CsvGenerator {
 
     public void generateCsvReport(AnalyzeContainer analyzeContainer) {
         logger.info("Generating CSV report");
-
         createNewOutputFile(false, DEFAULT_CSV_FILE_NAME);
 
-        try (BufferedWriter writer = Files.newBufferedWriter(Path.of(DEFAULT_CSV_FILE_NAME), StandardCharsets.UTF_8)) {
-            List<String> output = new ArrayList<>();
-            if (headers)
-                writeHeaders(analyzeContainer, output);
+        List<String> output = generateCsvLines(analyzeContainer);
+        writeToFile(output, DEFAULT_CSV_FILE_NAME);
+    }
 
-            for (var analyzeInstance : analyzeContainer.getAnalyzeInstances()) {
-                StringBuilder csvLine = new StringBuilder();
-                int visitedMethods = 0;
-                for (var method : analyzeInstance.getAnalyzeMethods()) {
-                    csvLine.append(method.toString(false));
-                    if (visitedMethods < analyzeContainer.getAnalyzeMethods().size() - 1)
-                        csvLine.append(",");
-                    visitedMethods++;
-                }
-                output.add(csvLine.toString());
+    private List<String> generateCsvLines(AnalyzeContainer analyzeContainer) {
+        List<String> output = new ArrayList<>();
+        if (headers)
+            writeHeaders(analyzeContainer, output);
+
+        for (var analyzeInstance : analyzeContainer.getAnalyzeInstances()) {
+            StringBuilder csvLine = new StringBuilder();
+            int visitedMethods = 0;
+            for (var method : analyzeInstance.getAnalyzeMethods()) {
+                csvLine.append(method.toString(false));
+                if (visitedMethods < analyzeContainer.getAnalyzeMethods().size() - 1)
+                    csvLine.append(",");
+                visitedMethods++;
             }
-
-            writeToFile(output, DEFAULT_CSV_FILE_NAME);
-        } catch (IOException e) {
-            logger.error("Failed to write CSV report", e);
-            throw new RuntimeException(e);
+            output.add(csvLine.toString());
         }
+
+        return output;
     }
 
     private void writeHeaders(AnalyzeContainer analyzeContainer, List<String> output) {
