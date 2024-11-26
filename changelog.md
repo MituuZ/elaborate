@@ -1,4 +1,7 @@
 # Changelog
+## 0.2.2
+- Switch to dark theme
+
 ## 0.2.1
 - Implement basic csv generator
 
