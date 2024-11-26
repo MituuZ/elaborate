@@ -37,9 +37,11 @@ import java.nio.file.Files;
 import java.util.ArrayList;
 import java.util.List;
 
+import static com.mituuz.elaborate.util.FileUtil.DEFAULT_OUTPUT_DIR;
+import static com.mituuz.elaborate.util.FileUtil.writeToFile;
+
 public class HtmlGenerator {
     private static final Logger logger = LoggerFactory.getLogger(HtmlGenerator.class);
-    private static final String DEFAULT_OUTPUT_DIR = "build/";
     private static final String OUTPUT_FILE = "result.html";
     private static final String OUTPUT_TABLE_FILE = "table.html";
     private static final String OUTPUT_CSS_FILE = "styles.css";
@@ -132,15 +134,6 @@ public class HtmlGenerator {
         }
         input.add("</table>");
         writeToFile(input, OUTPUT_TABLE_FILE);
-    }
-
-    private void writeToFile(List<String> input, String filename) {
-        File file = new File(DEFAULT_OUTPUT_DIR + filename);
-        try {
-            Files.write(file.toPath(), input, StandardCharsets.UTF_8);
-        } catch (IOException e) {
-            logger.error("Failed to write to output file: {}", file.getName(), e);
-        }
     }
 
     private void createNewOutputFile(boolean visited, String filename) {

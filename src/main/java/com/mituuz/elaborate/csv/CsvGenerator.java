@@ -24,11 +24,63 @@ SOFTWARE.
 package com.mituuz.elaborate.csv;
 
 import com.mituuz.elaborate.entities.AnalyzeContainer;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+import java.io.BufferedWriter;
+import java.io.IOException;
+import java.nio.charset.StandardCharsets;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.util.ArrayList;
+import java.util.List;
+
+import static com.mituuz.elaborate.util.FileUtil.createNewOutputFile;
+import static com.mituuz.elaborate.util.FileUtil.writeToFile;
 
 public class CsvGenerator {
+    private static final Logger logger = LoggerFactory.getLogger(CsvGenerator.class);
+    private static final String DEFAULT_CSV_FILE_NAME = "report.csv";
     private boolean headers = true;
 
     public void generateCsvReport(AnalyzeContainer analyzeContainer) {
+        logger.info("Generating CSV report");
 
+        createNewOutputFile(false, DEFAULT_CSV_FILE_NAME);
+
+        try (BufferedWriter writer = Files.newBufferedWriter(Path.of(DEFAULT_CSV_FILE_NAME), StandardCharsets.UTF_8)) {
+            List<String> output = new ArrayList<>();
+            if (headers)
+                writeHeaders(analyzeContainer, output);
+
+            for (var analyzeInstance : analyzeContainer.getAnalyzeInstances()) {
+                StringBuilder csvLine = new StringBuilder();
+                int visitedMethods = 0;
+                for (var method : analyzeInstance.getAnalyzeMethods()) {
+                    csvLine.append(method.toString(false));
+                    if (visitedMethods < analyzeContainer.getAnalyzeMethods().size() - 1)
+                        csvLine.append(",");
+                    visitedMethods++;
+                }
+                output.add(csvLine.toString());
+            }
+
+            writeToFile(output, DEFAULT_CSV_FILE_NAME);
+        } catch (IOException e) {
+            logger.error("Failed to write CSV report", e);
+            throw new RuntimeException(e);
+        }
+    }
+
+    private void writeHeaders(AnalyzeContainer analyzeContainer, List<String> output) {
+        int visitedMethods = 0;
+        StringBuilder headerLine = new StringBuilder();
+        for (var method : analyzeContainer.getAnalyzeMethods()) {
+            headerLine.append(method.getMethodName());
+            if (visitedMethods < analyzeContainer.getAnalyzeMethods().size() - 1)
+                headerLine.append(",");
+            visitedMethods++;
+        }
+        output.add(headerLine.toString());
     }
 }

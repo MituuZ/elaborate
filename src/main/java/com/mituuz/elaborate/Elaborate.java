@@ -208,6 +208,7 @@ public class Elaborate<T> {
         Elaborate<String> elaborate = Elaborate.<String>builder()
                 .generateHtml()
                 .generateHtmlTable()
+                .generateCsvReport()
                 .addInstances(List.of("Hell", "Orld", "OF", "Hello there"))
                 .addAnalyzeMethods("toLowerCase", "toString")
                 .setTitleMethod("hashCode")

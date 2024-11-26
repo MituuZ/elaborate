@@ -48,7 +48,7 @@ class AnalyzeMethodTest {
     void generateHtml_empty() {
         AnalyzeMethod analyzeMethod = new AnalyzeMethod("testMethod");
         var result = analyzeMethod.getHtml(true);
-        assertEquals("<h3>testMethod</h3><p>Empty</p>", result);
+        assertEquals("<h3>testMethod</h3><p></p>", result);
     }
 
     @Test
@@ -71,7 +71,7 @@ class AnalyzeMethodTest {
     void generateHtml_noMethodName_empty() {
         AnalyzeMethod analyzeMethod = new AnalyzeMethod("testMethod");
         var result = analyzeMethod.getHtml(false);
-        assertEquals("<p>Empty</p>", result);
+        assertEquals("<p></p>", result);
     }
 
     @Test
@@ -79,6 +79,6 @@ class AnalyzeMethodTest {
         AnalyzeMethod analyzeMethod = new AnalyzeMethod("testMethod");
         analyzeMethod.addValue(new AnalyzeMethod("Hello"));
         var result = analyzeMethod.getHtml(false);
-        assertEquals("<p>Empty</p>", result);
+        assertEquals("<p></p>", result);
     }
 }

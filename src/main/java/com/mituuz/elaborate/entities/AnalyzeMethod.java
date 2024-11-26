@@ -61,17 +61,21 @@ public class AnalyzeMethod {
         } else if (getIntegerValue() != null) {
             input.append("<p>").append(getIntegerValue()).append("</p>");
         } else {
-            input.append("<p>Empty</p>");
+            input.append("<p></p>");
         }
         return input.toString();
     }
 
     public String toString(boolean printMethodName) {
         if (printMethodName) {
-            return getMethodName() + ": " + (getStringValue() != null ? getStringValue() : getIntegerValue());
+            if (getStringValue() != null || getIntegerValue() != null)
+                return getMethodName() + ": " + (getStringValue() != null ? getStringValue() : getIntegerValue());
+
         } else {
-            return (getStringValue() != null ? getStringValue() : getIntegerValue().toString());
+            if (getStringValue() != null || getIntegerValue() != null)
+                return (getStringValue() != null ? getStringValue() : getIntegerValue().toString());
         }
+        return "no value";
     }
 
     public String getMethodName() {

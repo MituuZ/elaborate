@@ -1,4 +1,7 @@
 # Changelog
+## 0.2.1
+- Implement basic csv generator
+
 ## 0.2.0
 - Implement a builder for Elaborate
 
