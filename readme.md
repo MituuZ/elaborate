@@ -104,7 +104,6 @@ Generates the following files:
 - `styles.css`
 
 ## ToDo
-- [ ] Create a csv file
 - [ ] Separate conditionals to separate classes for better constructors
   - Add conditionals through a builder method
 - [ ] To allow configuring/reporting at the same time, create instances and configure them on builder
@@ -121,6 +120,7 @@ Generates the following files:
 - [ ] Add support for custom css
   - Try to load it after inlining the default css
 - [ ] Add field configurations (stylize results based on values)
+- [x] Create a csv file
 - [x] Create a builder class
 - [x] Check that the css is copied correctly when using the jar file
 - [x] Generate a css file
