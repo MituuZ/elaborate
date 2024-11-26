@@ -37,7 +37,7 @@ public class MethodConditional {
         this.integerValue = integerValue;
     }
 
-    public MethodConditional(ConditionType conditionType, int conditionIntValue, String conditionStringValue, ConditionValueConditional conditionValueConditional) {
+    public MethodConditional(ConditionType conditionType, Integer conditionIntValue, String conditionStringValue, ConditionValueConditional conditionValueConditional) {
         this.conditionType = conditionType;
         this.conditionIntValue = conditionIntValue;
         this.conditionStringValue = conditionStringValue;

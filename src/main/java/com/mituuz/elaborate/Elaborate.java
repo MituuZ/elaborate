@@ -31,6 +31,7 @@ import com.mituuz.elaborate.csv.CsvGenerator;
 import com.mituuz.elaborate.entities.AnalyzeContainer;
 import com.mituuz.elaborate.entities.AnalyzeContainer.AnalyzeInstance;
 import com.mituuz.elaborate.entities.AnalyzeMethod;
+import com.mituuz.elaborate.entities.IntegerConditional;
 import com.mituuz.elaborate.entities.MethodConditional;
 import com.mituuz.elaborate.html.HtmlGenerator;
 import com.mituuz.elaborate.util.ElaborateBuilder;
@@ -215,7 +216,7 @@ public class Elaborate<T> {
                 .build();
 
         AnalyzeMethod conditionalMethod = new AnalyzeMethod("length");
-        var condition = new MethodConditional(INTEGER, 3, "", GREATER_THAN);
+        var condition = new IntegerConditional(3, GREATER_THAN);
         conditionalMethod.setMethodConditional(condition);
 
         elaborate.addConditionalMethods(conditionalMethod);
