@@ -98,6 +98,7 @@ Generates the following files:
 ## ToDo
 - [ ] Create a csv file
 - [ ] Separate conditionals to separate classes for better constructors
+  - Add conditionals through a builder method
 - [ ] Allow renaming title method in HTML table
 - [ ] Create a builder class
 - [ ] Add sorting
