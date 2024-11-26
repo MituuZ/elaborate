@@ -1,6 +1,7 @@
 plugins {
     kotlin("jvm") version "2.0.21"
     application
+    `maven-publish`
 }
 
 group = "com.mituuz"
@@ -26,4 +27,13 @@ tasks.test {
 
 application {
     mainClass.set("com.mituuz.elaborate.Elaborate")
+}
+
+// Publish to local repository by running `./gradlew publishToMavenLocal`
+publishing {
+    publications {
+        create<MavenPublication>("mavenJava") {
+            from(components["java"])
+        }
+    }
 }

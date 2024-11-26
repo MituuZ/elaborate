@@ -1,4 +1,7 @@
 # Changelog
+## 0.1.2
+- Add an option to publish to the local maven repository
+
 ## 0.1.1
 - Many minor changes and improvements
 - Create a default css file for the generated HTML

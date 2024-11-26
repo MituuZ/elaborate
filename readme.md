@@ -5,20 +5,51 @@ Elaborate requires Java 11 or higher.
 
 ![](resources/img.png "An example of an HTML table output using hashCode as the title method")
 
-## Usage
-### Using a jar file
-For now, you'll need to clone the repository and build the jar file yourself. 
+## Installation
+For now, only local installations are supported. In the future, I'm hoping to publish it to Maven Central.
 
-In the future I'm hoping to publish it to Maven Central.
+### Using a local installation
+By publishing the jar file to Maven Local, you can use it as a dependency in your projects.
+
+```shell
+git clone git@github.com:MituuZ/elaborate.git
+cd elaborate
+./gradlew publishToMavenLocal
+```
+
+#### Adding a local/remote dependency
+This requires adding the local Maven repository to your project's repositories.
+```kotlin
+repositories {
+    mavenLocal()
+}
+```
+
+```kotlin
+dependencies {
+    implementation("com.mituuz:elaborate:<version>")
+}
+```
+
+### Using a jar file
+You can alternatively use the jar file directly in your project.
+
 ```shell
 git clone git@github.com:MituuZ/elaborate.git
 cd elaborate
 ./gradlew jar
 ```
 
-### Import the jar file
-Add the jar file to your project's dependencies and you're good to go.
+#### Adding a jar file dependency
+For gradle, just add the jar file to your project's dependencies, and you're good to go.
 
+```kotlin
+dependencies {
+    implementation(files("path/to/elaborate.jar"))
+}
+```
+
+## Usage
 ### Create a new Elaborate instance with the class that you want to analyze
 ```java
 Elaborate<CustomClass> elaborate = new Elaborate<>();
