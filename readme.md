@@ -101,12 +101,9 @@ Generates the following files:
 - [ ] Create a builder class
 - [x] Change boolean parameters to sets with default values and no parameters
 - [ ] Generate unique names for files
-- [ ] Inline default css
-  - Update the picture on readme
 - [ ] Add support for custom css
   - Try to load it after inlining the default css
-- [ ] Check that the css is copied correctly when using the jar file
-  - Is not
+- [x] Check that the css is copied correctly when using the jar file
 - [x] Add some styling to the HTML output
 - [x] Add filtering
 - [ ] Add sorting
