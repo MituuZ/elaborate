@@ -109,7 +109,6 @@ Generates the following files:
   - Add conditionals through a builder method
 - [ ] To allow configuring/reporting at the same time, create instances and configure them on builder
 - [ ] Allow renaming title method in HTML table
-- [ ] Create a builder class
 - [ ] Add sorting
 - [ ] Publish to Maven Central
 - [ ] Allow specifying the output file path and name
@@ -122,6 +121,7 @@ Generates the following files:
 - [ ] Add support for custom css
   - Try to load it after inlining the default css
 - [ ] Add field configurations (stylize results based on values)
+- [x] Create a builder class
 - [x] Check that the css is copied correctly when using the jar file
 - [x] Generate a css file
 - [x] Add some styling to the HTML output
