@@ -27,6 +27,7 @@ package com.mituuz.elaborate;
 import java.util.List;
 import java.util.Set;
 
+import com.mituuz.elaborate.csv.CsvGenerator;
 import com.mituuz.elaborate.entities.AnalyzeContainer;
 import com.mituuz.elaborate.entities.AnalyzeContainer.AnalyzeInstance;
 import com.mituuz.elaborate.entities.AnalyzeMethod;
@@ -48,6 +49,7 @@ public class Elaborate<T> {
     private final Set<AnalyzeMethod> analyzeMethods = new LinkedHashSet<>();
     private boolean generateHtml = false;
     private boolean generateHtmlTable = false;
+    private boolean generateCsv = false;
     private boolean printMethodNames = true;
     private boolean printToStdOut = true;
     private String titleMethod = "toString";
@@ -66,6 +68,10 @@ public class Elaborate<T> {
             htmlGenerator.generateHtmlReport(analyzeContainer);
         if (generateHtmlTable)
             htmlGenerator.generateHtmlTableReport(analyzeContainer);
+        if (generateCsv) {
+            var csvGenerator = new CsvGenerator();
+            csvGenerator.generateCsvReport(analyzeContainer);
+        }
     }
 
     private List<String> processInstances() {
@@ -187,6 +193,14 @@ public class Elaborate<T> {
      */
     public void generateHtmlTable() {
         this.generateHtmlTable = true;
+    }
+
+    /**
+     * Generate CSV output<br>
+     * Defaults to <code>false</code>
+     */
+    public void generateCsvReport() {
+        this.generateCsv = true;
     }
 
     public static void main(String[] args) {

@@ -106,6 +106,7 @@ Generates the following files:
 - [ ] Create a csv file
 - [ ] Separate conditionals to separate classes for better constructors
   - Add conditionals through a builder method
+- [ ] To allow configuring/reporting at the same time, create instances and configure them on builder
 - [ ] Allow renaming title method in HTML table
 - [ ] Create a builder class
 - [ ] Add sorting
