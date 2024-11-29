@@ -44,22 +44,12 @@ public class HtmlGenerator {
     private static final Logger logger = LoggerFactory.getLogger(HtmlGenerator.class);
     private static final String OUTPUT_FILE = "result.html";
     private static final String OUTPUT_TABLE_FILE = "table.html";
-    private static final String OUTPUT_CSS_FILE = "styles.css";
     private static final String DEFAULT_CSS = "/static/styles.css";
 
     private boolean printMethodNames = false;
 
     public HtmlGenerator(boolean printMethodNames) {
         this.printMethodNames = printMethodNames;
-        createCssFile();
-    }
-
-    public HtmlGenerator() { }
-
-    private void createCssFile() {
-        createNewOutputFile(false, OUTPUT_CSS_FILE);
-        String css = readDefaultCss();
-        writeToFile(List.of(css), OUTPUT_CSS_FILE);
     }
 
     /**

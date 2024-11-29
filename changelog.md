@@ -1,4 +1,8 @@
 # Changelog
+## 0.2.3
+- Inline css in the generated HTML
+- Add a default font styling
+
 ## 0.2.2
 - Switch to dark theme
 
