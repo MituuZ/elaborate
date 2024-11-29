@@ -157,7 +157,10 @@ public class HtmlGenerator {
     private List<String> generateHead() {
         var input = new ArrayList<String>();
         input.add("<head>");
-        input.add("<link rel=\"stylesheet\" type=\"text/css\" href=\"styles.css\">");
+        String css = readDefaultCss();
+        input.add("<style>");
+        input.add(css);
+        input.add("</style>");
         input.add("</head>");
         return input;
     }
