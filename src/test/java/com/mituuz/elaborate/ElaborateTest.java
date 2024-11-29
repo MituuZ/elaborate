@@ -53,7 +53,7 @@ class ElaborateTest {
     void processInstances_printMethodNames() {
         Elaborate<Integer> elaborate = new Elaborate<>();
         elaborate.addInstances(List.of(1, 2, 3));
-        elaborate.addAnalyzeMethods("toString", "intValue");
+        elaborate.createAnalyzeMethods("toString", "intValue");
         List<String> output = elaborate.processInstances();
         assertEquals(12, output.size());
         assertEquals("1", output.get(0));
@@ -68,7 +68,7 @@ class ElaborateTest {
     void processInstances_skipMethodNames() {
         Elaborate<Integer> elaborate = new Elaborate<>();
         elaborate.addInstances(List.of(1, 2, 3));
-        elaborate.addAnalyzeMethods("toString", "intValue");
+        elaborate.createAnalyzeMethods("toString", "intValue");
         elaborate.skipMethodNames();
         List<String> output = elaborate.processInstances();
         assertEquals(12, output.size());

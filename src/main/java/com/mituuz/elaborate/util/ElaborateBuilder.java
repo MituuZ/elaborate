@@ -52,7 +52,7 @@ public class ElaborateBuilder<T> {
     }
 
     public ElaborateBuilder<T> addAnalyzeMethods(String... methodNames) {
-        elaborate.addAnalyzeMethods(methodNames);
+        elaborate.createAnalyzeMethods(methodNames);
         return this;
     }
 

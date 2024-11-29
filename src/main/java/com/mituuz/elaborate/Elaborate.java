@@ -25,14 +25,12 @@ SOFTWARE.
 package com.mituuz.elaborate;
 
 import java.util.List;
-import java.util.Set;
 
 import com.mituuz.elaborate.csv.CsvGenerator;
 import com.mituuz.elaborate.entities.AnalyzeContainer;
 import com.mituuz.elaborate.entities.AnalyzeContainer.AnalyzeInstance;
 import com.mituuz.elaborate.entities.AnalyzeMethod;
 import com.mituuz.elaborate.entities.IntegerConditional;
-import com.mituuz.elaborate.entities.MethodConditional;
 import com.mituuz.elaborate.html.HtmlGenerator;
 import com.mituuz.elaborate.util.ElaborateBuilder;
 import org.slf4j.Logger;
@@ -41,7 +39,6 @@ import org.slf4j.LoggerFactory;
 import java.lang.reflect.InvocationTargetException;
 import java.util.*;
 
-import static com.mituuz.elaborate.entities.MethodConditional.ConditionType.INTEGER;
 import static com.mituuz.elaborate.entities.MethodConditional.ConditionValueConditional.GREATER_THAN;
 
 public class Elaborate<T> {
@@ -153,7 +150,7 @@ public class Elaborate<T> {
      * Add multiple methods to the list of methods to analyze<br>
      * These methods do not have any conditionals
      */
-    public void addAnalyzeMethods(String... methodNames) {
+    public void createAnalyzeMethods(String... methodNames) {
         for (String methodName : methodNames) {
             analyzeMethods.add(new AnalyzeMethod(methodName));
         }
@@ -212,6 +209,7 @@ public class Elaborate<T> {
                 .generateCsvReport()
                 .addInstances(List.of("Hell", "Orld", "OF", "Hello there"))
                 .addAnalyzeMethods("toLowerCase", "toString")
+                // .addConditionalMethods(new IntegerConditional())
                 .setTitleMethod("hashCode")
                 .build();
 
