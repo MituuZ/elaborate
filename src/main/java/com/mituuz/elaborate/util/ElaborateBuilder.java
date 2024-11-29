@@ -71,6 +71,11 @@ public class ElaborateBuilder<T> {
         return this;
     }
 
+    public ElaborateBuilder<T> skipPrint() {
+        elaborate.skipPrint();
+        return this;
+    }
+
     public Elaborate<T> build() {
         return this.elaborate;
     }

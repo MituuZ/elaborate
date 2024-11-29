@@ -180,7 +180,7 @@ public class Elaborate<T> {
 
     /**
      * Setting this flag skips printing the output to the standard output<br>
-     * By default, the output is printed to the standard output
+     * Defaults to <code>true</code>
      */
     public void skipPrint() {
         this.printToStdOut = false;
